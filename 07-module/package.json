@@ -1,0 +1,15 @@
+{
+  "name": "07-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-third-module.js",
+  "dependencies": {
+    "date-now": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
