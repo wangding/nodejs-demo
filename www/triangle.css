@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main, #output {
+  width: 800px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+#output {
+  font-family: "courier new";
+  font-size: 30px;
+  padding: 100px 0 0 400px;
+}

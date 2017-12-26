@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>法老的金字塔</title>
+  <link rel="stylesheet" type="text/css" href="triangle.css" />
+</head>
+<body>
+  <div id="main">
+    <h1>法老的金字塔 v1.0</h1>
+    <p>本程序在网页上实现用 * 打印金字塔。</p>
+    <p>要求如下：</p>
+      <ul>
+        <li>如果用户不输入任何数据，直接键入回车，则默认打印4层。</li>
+        <li>输入的层数范围是[3,10]。</li>
+        <li>如果层数小于3，提示用户“层数太小，法老住不下！”。并且提示用户重新输入。</li>
+        <li>如果层数大于10，提示用户“太高了，没那么多钱！”。并且提示用户重新输入。</li>
+        <li>如果输入非法字符，请提示用户。</li>
+      </ul>
+      <hr />
+    请输入金字塔的层数：
+    <input type="text" id="level" title="lvl" placeholder="4"/>
+    <input type="button" value="确定" onclick="triangle()" />
+  </div>
+  <div id="output"></div>
+  <script src='triangle.js'></script>
+</body>
+</html>
