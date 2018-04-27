@@ -1,15 +1,17 @@
 #!/usr/bin/node
 
-console.time('GET-DATA');
+console.time('TEST'); 
+longTask();
+console.timeEnd('TEST');
 
-var number;
+function longTask() {
+  var n;
 
-for(var i=0; i<10000; i++) {
-  for(var j=0; j<10000; j++) {
-    number = i * j;
+  for(var i=0; i<10000; i++) {
+    for(var j=0; j<10000; j++) {
+      n = i * j;
+    }
   }
+  
+  return n;
 }
-
-
-console.timeEnd('GET-DATA');
-console.log('number:', number);

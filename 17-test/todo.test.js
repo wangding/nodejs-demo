@@ -11,7 +11,7 @@ addTest();
 throwTest();
 doAsyncTest(function() {
   console.log('colmpleted %d tests.', testCompleted);
-})
+});
 
 function deleteTest() {
   console.log('test delete function');

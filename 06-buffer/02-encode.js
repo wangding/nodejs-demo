@@ -1,13 +1,16 @@
 #!/usr/bin/node
 
-var name = process.argv[2];
-var passwd = process.argv[3];
+const log = console.log,
+      usr = process.argv[2],
+      pwd = process.argv[3];
 
-console.log('name:', name);
-console.log('passwd:', passwd);
+if(process.argv.length !== 4) {
+  console.error('命令行格式：cmd username password');
+  process.exit(1);
+}
 
-var buf = new Buffer(name + ':' + passwd);
+log('user name: %s\npassword: %s', usr, pwd);
 
-console.log('user name and passwd:', buf.toString());
-console.log('user name and passwd with base64:', buf.toString('base64'));
-console.log('user name and passwd with hex:', buf.toString('hex'));
+const buf = new Buffer(usr + ':' + pwd);
+
+log('Base64:', buf.toString('Base64'));

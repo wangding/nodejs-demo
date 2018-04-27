@@ -1,8 +1,17 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      mod = process.argv[2],
+      src = process.argv[3];
 
-var mod = process.argv[2];
-var src = process.argv[3];
+if(process.argv.length != 4) {
+  console.error('命令行参数不正确！');
+  process.exit(1);
+}
 
-fs.chmodSync(src, mod);
+try{
+  fs.chmodSync(src, mod);
+} catch(err) {
+  console.error(err.message);
+  process.exit(2);
+}

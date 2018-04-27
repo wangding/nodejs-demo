@@ -1,17 +1,20 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs = require('fs');
 
-var opt;
-var src;
-var lnk;
+var opt, src, lnk;
 
 switch(process.argv.length) {
   case 4:
     src = process.argv[2];
     lnk = process.argv[3];
 
-    fs.linkSync(src, lnk);
+    if(fs.existsSync(src)){
+      fs.linkSync(src, lnk);
+    } else {
+      console.error('%s not exist!', src);
+      process.exit(1);
+    }
     break;
 
   case 5:
@@ -20,12 +23,17 @@ switch(process.argv.length) {
     lnk = process.argv[4];
 
     if(opt === '-s') {
-      fs.symlinkSync(src, lnk);
+      if(fs.existsSync(src)){
+        fs.symlinkSync(src, lnk);
+      } else {
+        console.error('%s not exist!', src);
+        process.exit(1);
+      }
     } else {
-      console.log('wrong!');
+      console.error('命令行参数不正确！');
     }
     break;
 
   default:
-    console.log('wrong!');
+    console.error('命令行参数不正确！');
 }

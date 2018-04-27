@@ -1,16 +1,12 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs   = require('fs'),
+      file = process.argv[2] || __filename;
 
-var file = process.argv[2] || __filename;
-
-var len = fs.statSync(file).size;
-var buf = new Buffer(len);
-
-var fid = fs.openSync(file, 'r');
+var len = fs.statSync(file).size,
+    buf = new Buffer(len),
+    fid = fs.openSync(file, 'r');
 
 fs.readSync(fid, buf, 0, len, 0);
 
 console.log(buf.toString('utf8'));
-
-fs.closeSync(fid);

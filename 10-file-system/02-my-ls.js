@@ -1,7 +1,11 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      dir = process.argv[2] || __dirname;
 
-var dir = process.argv[2];
-
-console.log(fs.readdirSync(dir));
+try {
+  console.log(fs.readdirSync(dir));
+} catch(err) {
+  console.error(err.message);
+  process.exit(1);
+}

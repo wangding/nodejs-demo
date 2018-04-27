@@ -1,15 +1,30 @@
 #!/usr/bin/node
 
-var fs = require('fs');
-var http = require('http');
+const fs   = require('fs'),
+      http = require('http'),
+      path = require('path'),
+      file = process.argv[2];
 
-var mime = 'image/jpg';
-var data = fs.readFileSync('./nodejs-logo.jpg').toString('base64');
-var uri = 'data:' + mime + ';base64,' + data;
+if(process.argv.length !== 3) {
+  console.error('命令行参数格式：cmd fileName');
+  process.exit(1);
+}
 
-//console.log('data uri:\n%s', uri);
+try {
+  var data = fs.readFileSync(file).toString('base64');
+} catch(e) {
+  console.error(e.message);
+  process.exit(2);
+}
 
-var html = '<!DOCTYPE html>\n<html>\n<body>\n<img alt="nodejs-logo" src="' + uri + '"\>\n</body>\n</html>';
+var ext  = path.extname(file);
+var uriData = 'data:image/' + ext.slice(1, ext.length) + ';base64,' + data;
+
+console.log('data uri:\n%s', uriData);
+
+var html = '<!DOCTYPE html><html><body><img alt="'
+      + path.basename(file, ext) 
+      + '" src="' + uriData + '"></body></html>';
 
 http.createServer(function(req, res) {
   console.log(req.headers);

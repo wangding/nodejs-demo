@@ -1,18 +1,28 @@
 #!/usr/bin/node
 
-var http = require('http'),
-    fs = require('fs'),
-    buf = {};
+const http = require('http'),
+      fs   = require('fs');
 
-var root = __dirname;
+var buf = {};
 
 http.createServer(function(req, res) {
-  var fileName = root + req.url;
-  sendFile(res, fileName);
+  sendFile(res, req.url);
 }).listen(8080);
 
-function sendFile(res, fileName) {
-  if(!buf[fileName]) { console.log('no memory!'); buf[fileName] = fs.readFileSync(fileName); }
+function sendFile(res, url) {
+  var file = __dirname + url;
 
-  res.end(buf[fileName]);
+  if(!buf[file]) {
+    if(!fs.existsSync(file)) {
+      res.statusCode = 404;
+      res.end('%s not exist!', file);
+      
+      return;
+    }
+
+    buf[file] = fs.readFileSync(file);   
+  }
+
+  res.end(buf[file]);
+  console.log('\n', buf, '\n');
 }

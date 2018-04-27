@@ -58,7 +58,7 @@ function show(res) {
 function add(req, res) {
   var body = '';
 
-  req.on('data', function(chunk) { body += chunk });
+  req.on('data', function(chunk) { body += chunk; });
   req.on('end', function() {
     console.log(body);
     

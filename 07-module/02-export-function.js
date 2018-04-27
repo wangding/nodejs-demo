@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-var pi = Math.PI;
+const pi = Math.PI;
 
 module.exports = function(radius) {
   function circumference() {
@@ -15,6 +15,6 @@ module.exports = function(radius) {
     area: area,
     circumference: circumference
   };
-}
+};
 
-console.log('\n02-export-function:\n', module);
+console.dir(module);

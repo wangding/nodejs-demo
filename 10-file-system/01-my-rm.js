@@ -1,7 +1,11 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      src = process.argv[2];
 
-var src = process.argv[2];
-
-if(fs.statSync(src).isFile())  fs.unlinkSync(src);
+if(fs.existsSync(src)) {
+  if(fs.statSync(src).isFile())  fs.unlinkSync(src);
+} else {
+  console.error('%s not exist!', src);
+  process.exit(1);
+}

@@ -18,5 +18,5 @@ http.get(new URL(addr), function(res) {
     var weather = JSON.parse(result);
 
     console.log(weather);
-  })
+  });
 });

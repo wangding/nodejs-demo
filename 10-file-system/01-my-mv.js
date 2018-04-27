@@ -1,8 +1,12 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      src = process.argv[2],
+      dst = process.argv[3];
 
-var src = process.argv[2];
-var dst = process.argv[3];
-
-fs.renameSync(src, dst);
+try {
+  fs.renameSync(src, dst);
+} catch(err) {
+  console.error(err.message);
+  process.exit(1);
+}

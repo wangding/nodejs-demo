@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-demo",
+  "version": "1.0.0",
+  "description": "Node.js demo code",
+  "scripts": {
+    "test": "eslint --quiet *"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangding/nodejs-demo.git"
+  },
+  "keywords": [
+    "node.js",
+    "demo",
+    "code"
+  ],
+  "author": "wangding",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangding/nodejs-demo/issues"
+  },
+  "homepage": "https://github.com/wangding/nodejs-demo#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  }
+}

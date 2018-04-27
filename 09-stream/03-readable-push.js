@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-var Readable = require('stream').Readable;
+const Readable = require('stream').Readable;
 
 var rs = new Readable();
 rs.push('hello ');

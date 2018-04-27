@@ -1,12 +1,19 @@
 #!/usr/bin/node
 
-var zlib = require('zlib'),
-    fs = require('fs'),
-    assert = require('assert'),
-    src = process.argv[2];
+const zlib = require('zlib'),
+      fs   = require('fs'),
+      src  = process.argv[2];
 
-assert.notEqual(src, undefined, 'file name can not be null');
+if(process.argv.length !== 3) {
+  console.error('命令行参数错误！');
+  process.exit(1);
+}
 
-var dst = src.slice(0, src.length - 3);
+if(!fs.existsSync(src)) {
+  console.error('%s not exist!', src);
+  process.exit(2);
+}
+
+const dst = src.slice(0, src.length - 3);
 
 fs.createReadStream(src).pipe(zlib.createGunzip()).pipe(fs.createWriteStream(dst));

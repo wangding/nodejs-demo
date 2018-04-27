@@ -1,7 +1,11 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs   = require('fs'),
+      file = process.argv[2] || __filename;
 
-var file = process.argv[2] || __filename;
-
-fs.createReadStream(file).pipe(process.stdout);
+if(fs.existsSync(file)) {
+  fs.createReadStream(file).pipe(process.stdout);
+} else {
+  console.error('%s not exist!', file);
+  process.exit(1);
+}

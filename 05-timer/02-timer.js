@@ -2,12 +2,10 @@
 
 console.log('start...');
 
-
-var timeID = setInterval(loop, 500);
+const timeID = setInterval(loop, 500);
 timeID.unref();
 
-function loop()
-{
+function loop() {
   console.log('I will loop forever!');
 }
 

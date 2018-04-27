@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-var EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter;
 
 function MusicPlayer(track) {
   this.track = track;
@@ -19,12 +19,12 @@ function MusicPlayer(track) {
 MusicPlayer.prototype = {
   toString: function() {
     if(this.playing) {
-      return "Now Playing: " + this.track;
+      return 'Now Playing: ' + this.track;
     } else {
       return 'Stopped';
     }
   }
-}
+};
 
 var musicPlayer = new MusicPlayer('storm');
 var e = musicPlayer.events;

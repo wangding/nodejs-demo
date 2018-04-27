@@ -1,7 +1,5 @@
 #!/usr/bin/node
 
-var cp = require('child_process');
-
 console.log('I am child process. PID:', process.pid);
 
 process.on('message', function(msg) {

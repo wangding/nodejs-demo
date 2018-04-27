@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs = require('fs');
 
-var width = 16;
-var height = 16;
+const width = 16,
+      height = 16;
 
 var pixelByteSize = width * height * 4;
 var totalSize = pixelByteSize + 54;
@@ -24,7 +24,6 @@ buf.writeInt32LE(width, 0x12);
 buf.writeInt32LE(height, 0x16);
 
 // data
-
 for(var i=54; i<totalSize; i+=4) {
   buf.writeUInt32LE(0xff0000ff, i);
 }

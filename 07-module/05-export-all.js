@@ -6,4 +6,4 @@ module.exports = {
   Circle: require('./02-export-object')
 };
 
-console.log(module);
+console.dir(module);

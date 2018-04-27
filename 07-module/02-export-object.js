@@ -1,21 +1,11 @@
 #!/usr/bin/node
 
-var pi = Math.PI;
+const pi = Math.PI;
 
-var Circle = function (radius) {
-  this.diameter = function() {
-    return 2 * radius;
-  }
+module.exports = {
+  diameter : function(radius) { return 2 * radius; },
+  circumference : function(radius) { return pi * 2 * radius; },
+  area : function(radius) { return pi * radius * radius; }
+};
 
-  this.circumference = function() {
-    return pi * 2 * radius;
-  }
-
-  this.area = function() {
-    return pi * radius * radius;
-  }
-}
-
-console.log('\n02-export-object\n', module);
-
-module.exports = Circle;
+console.dir(module);

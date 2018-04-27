@@ -1,8 +1,19 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      src = process.argv[2],
+      dst = process.argv[3];
 
-var src = process.argv[2];
-var dst = process.argv[3];
+var sta, stm;
 
-fs.createReadStream(src).pipe(fs.createWriteStream(dst));
+if(fs.existsSync(src)) {
+  stm = fs.createReadStream(src).pipe(fs.createWriteStream(dst));
+  
+  stm.on('close', function() {
+    sta = fs.statSync(src);
+    fs.chmodSync(dst, sta.mode);
+  });
+} else {
+  console.error('%s not exist!', src);
+  process.exit(1);
+}

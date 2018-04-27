@@ -1,28 +1,22 @@
 #!/usr/bin/node
 
-console.log('architecture:', process.arch);
-console.log('platform:', process.platform);
+const log = console.log;
 
-console.log('');
+log('architecture:', process.arch);
+log('platform: %s\n', process.platform);
 
-console.log('process id:', process.pid);
-console.log('exePath:', process.execPath);
+log('process id:', process.pid);
+log('exePath: %s\n', process.execPath);
 
-console.log('');
+log('node version:', process.version);
+log('user id:', process.getuid());
+log('group id:', process.getgid());
+log('cwd: %s\n', process.cwd());
 
-console.log('node version:', process.version);
-console.log('user id:', process.getuid());
-console.log('group id:', process.getgid());
-console.log('cwd:', process.cwd());
+log('rss:', process.memoryUsage().rss);
+log('heapTotal:', process.memoryUsage().heapTotal);
+log('heapUsed:', process.memoryUsage().heapUsed);
+log('external: %s\n', process.memoryUsage().external);
 
-console.log('');
-
-console.log('rss:', process.memoryUsage().rss);
-console.log('heapTotal:', process.memoryUsage().heapTotal);
-console.log('heapUsed:', process.memoryUsage().heapUsed);
-console.log('external:', process.memoryUsage().external);
-
-console.log('');
-
-//console.log('\env:', process.env);
-console.log('host name:', process.env.HOSTNAME);
+log('env:', process.env);
+log('host name:', process.env.HOSTNAME);

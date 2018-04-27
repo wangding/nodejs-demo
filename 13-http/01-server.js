@@ -10,6 +10,4 @@ server.on('request', function(req, res) {
 
 server.listen(8080, function() {
   console.log('Listening on %d.', this.address().port);
-})
-
-
+});

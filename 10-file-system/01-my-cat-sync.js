@@ -1,7 +1,11 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs   = require('fs'),
+      file = process.argv[2] || __filename;
 
-var file = process.argv[2] || __filename;
-
-console.log(fs.readFileSync(file).toString('utf8'));
+try{
+  console.log(fs.readFileSync(file).toString('utf8'));
+} catch(err) {
+  console.error(err.message);
+  process.exit(1);
+}

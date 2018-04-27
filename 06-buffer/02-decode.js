@@ -1,17 +1,16 @@
 #!/usr/bin/node
 
-var msg = process.argv[2];
+if(process.argv.length !== 3) {
+  console.error('命令行格式：cmd base64_string');
+  process.exit(1);
+}
 
-var parseBasicAuth = function(encodeString) {
-  var buf = new Buffer(encodeString, 'base64');
-  var parts = buf.toString('utf8').split(':');
+const buf = new Buffer(process.argv[2], 'base64');
+const info = buf.toString('utf8').split(':');
 
-  return {
-    name: parts[0],
-    passwd: parts[1]
-  };
-};
+if(info.length !== 2) {
+  console.error('信息有误！');
+  process.exit(2);
+}
 
-var credentials = parseBasicAuth(msg);
-
-console.log(credentials);
+console.log('user name: %s\npassword: %s', info[0], info[1]);

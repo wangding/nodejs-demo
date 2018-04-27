@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs = require('fs');
 
 var w = fs.watch(__dirname, console.log);
 
@@ -12,5 +12,5 @@ process.on('SIGINT', function() {
 
   setTimeout(function() {
     process.exit();
-  }, 10000);
+  }, 5000);
 });

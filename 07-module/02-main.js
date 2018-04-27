@@ -1,11 +1,17 @@
 #!/usr/bin/node
 
-var Circle = require('./02-export-object');
+/*
+var pi = require('./02-export-var.js');
 
-console.log(Circle);
+console.log('\nPI:', pi);
+var circle = require('./02-export-function.js');
 
-var c = new Circle(10);
+console.log('\narea:\t\t', circle(20).area());
+console.log('circumference:\t', circle(20).circumference());
+*/
+//var circle = require('./02-export-object');
+const circle = require('./02-export-object2.js');
 
-console.log('diameter:', c.diameter());
-console.log('circumference:', c.circumference());
-console.log('area:', c.area());
+console.log('\ndiameter:\t', circle.diameter(10));
+console.log('circumference:\t', circle.circumference(10));
+console.log('area:\t\t', circle.area(10));

@@ -1,7 +1,6 @@
 #!/usr/bin/node
 
-var fs = require('fs');
-
-var file = process.argv[2];
+const fs   = require('fs'),
+      file = process.argv[2];
 
 fs.writeFileSync(file, '');

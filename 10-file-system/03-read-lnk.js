@@ -1,9 +1,16 @@
 #!/usr/bin/node
 
-var fs = require('fs');
+const fs  = require('fs'),
+      src = process.argv[2];
 
-var src = process.argv[2];
+if(typeof(src) === 'undefined' || process.argv.length !== 3) {
+  console.error('命令行参数不正确!');
+  process.exit(1);
+}
 
-var lnk = fs.readlinkSync(src);
-
-console.log(src, '->', lnk);
+try{
+  console.log(src, '->', fs.readlinkSync(src));
+} catch(err) {
+  console.error(err.message);
+  process.exit(2);
+}

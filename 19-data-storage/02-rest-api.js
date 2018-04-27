@@ -109,7 +109,7 @@ function loadData() {
   } catch(e) { return []; }
 }
 
-process.on('SIGINT', function(code) {
+process.on('SIGINT', function() {
   fs.writeFileSync('./data.txt', JSON.stringify(items));
   process.exit();
 });

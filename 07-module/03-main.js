@@ -1,11 +1,9 @@
 #!/usr/bin/node
 
-var obj = require('./03-export-all');
+const log = console.log;
+require('./03-global.js');
 
-console.log(obj.pi);
-console.log(obj.circle(10).area());
-
-var c = new obj.Circle(20);
-console.log(c.diameter());
-
-
+/*global pi circle objCircle:true */
+log('pi:', pi);
+log('area:', circle(20).area());
+log('diameter:', objCircle.diameter(20));
