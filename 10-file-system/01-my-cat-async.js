@@ -3,7 +3,7 @@
 const fs   = require('fs'),
       file = process.argv[2] || __filename;
 
-fs.readFile(file, function(err, buf) {
+fs.readFile(file, (err, buf) => {
   if(err) {
     console.error(err.message);
     process.exit(1);

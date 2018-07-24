@@ -8,11 +8,11 @@ var Radio = function(station) {
 
   var self = this;
 
-  setTimeout(function() {
+  setTimeout(() => {
     self.emit('open', station);
   }, 0);
 
-  setTimeout(function() {
+  setTimeout(() => {
     self.emit('stop', station);
   }, 5000);
 };

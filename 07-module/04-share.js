@@ -4,8 +4,8 @@ var count = 0;
 
 function Num() {}
 
-Num.prototype.add = function() { count++; };
+Num.prototype.add = () => count++;
 
-Num.prototype.getCount = function() { return count; };
+Num.prototype.getCount = () => count;
 
 module.exports = Num;

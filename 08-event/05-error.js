@@ -13,7 +13,7 @@ function MusicPlayer(track) {
 }
 
 MusicPlayer.prototype = {
-  toString: function() {
+  toString: () => {
     if(this.playing) {
       return 'Now Playing: ' + this.track;
     } else {
@@ -24,27 +24,27 @@ MusicPlayer.prototype = {
 
 var musicPlayer = new MusicPlayer('storm');
 
-musicPlayer.on('play', function() {
+musicPlayer.on('play', () => {
   this.playing = true;
   console.log('\n', this.toString());
 });
 
-musicPlayer.on('stop', function() {
+musicPlayer.on('stop', () => {
   this.playing = false;
   console.log('\n', this.toString());
 });
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', (err) => {
   console.error(err);
   process.exit(1);
 });
 
 musicPlayer.emit('play');
 
-setTimeout(function() {
+setTimeout(() => {
   musicPlayer.emit('stop');
 }, 2000);
 
-setTimeout(function() {
+setTimeout(() => {
   musicPlayer.emit('error', new Error('WRONG!'));
 }, 3000);

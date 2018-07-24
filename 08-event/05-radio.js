@@ -3,11 +3,11 @@
 var Radio = function(station) {
   var _listeners = {};
 
-  setTimeout(function() {
+  setTimeout(() => {
     emit('open', station);
   }, 0);
 
-  setTimeout(function() {
+  setTimeout(() => {
     emit('stop', station);
   }, 5000);
 
@@ -17,12 +17,12 @@ var Radio = function(station) {
       process.exit(1);
     }
 
-    _listeners[evt].forEach(function(fn) {
+    _listeners[evt].forEach((fn) => {
       fn.call(this, arg);
     });
   }
 
-  this.on = function(evt, fn) {
+  this.on = (evt, fn) => {
     if(typeof(_listeners[evt]) === 'undefined') {
       _listeners[evt] = [];
     }

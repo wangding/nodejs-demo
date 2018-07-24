@@ -37,14 +37,14 @@ p = [];
 
 log('请输入信源概率分布：(Ctrl+D 退出输入)\np%d:', i);
 
-stdin.on('data', function(data) {
+stdin.on('data', (data) => {
   if(validatePi(data)) {
     p.push(Number(data));
     log('p%d:', ++i);
   }
 });
 
-stdin.on('end', function() {
+stdin.on('end', () => {
   if(p.length === 0) {
     exit();
   }
@@ -96,7 +96,7 @@ function validatePi(data) {
 }
 
 function sigma(p) {
-  return p.reduce(function(total, pi){
+  return p.reduce((total, pi) => {
     return roundFractional(total + Number(pi), 2);
   }, 0);
 }
@@ -112,7 +112,7 @@ function sigma(p) {
  * @returns 返回信源熵
  */
 function h(p) {
-  return p.reduce(function(total, pi) {
+  return p.reduce((total, pi) => {
     return total - pi * Math.log2(pi);
   }, 0);
 }

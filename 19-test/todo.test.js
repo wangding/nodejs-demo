@@ -9,7 +9,7 @@ var testCompleted = 0;
 deleteTest();
 addTest();
 throwTest();
-doAsyncTest(function() {
+doAsyncTest(() => {
   console.log('colmpleted %d tests.', testCompleted);
 });
 
@@ -39,7 +39,7 @@ function throwTest() {
 
 function doAsyncTest(cb) {
   console.log('test doAsync function');
-  todo.doAsync(function(value) {
+  todo.doAsync((value) => {
     assert(value, 'callback should be passed true');
     testCompleted++;
     cb();

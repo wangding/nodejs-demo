@@ -2,7 +2,7 @@
 
 const pi = Math.PI;
 
-module.exports = function(radius) {
+module.exports = (radius) => {
   function circumference() {
     return pi * 2 * radius;
   }

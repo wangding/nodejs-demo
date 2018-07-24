@@ -4,7 +4,7 @@ var http = require('http'),
     fs = require('fs'),
     items = loadData();
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   console.log(req.headers);
   console.log('');
 
@@ -44,8 +44,8 @@ function insert(req, res) {
   //console.log('POST');
   var item = '';
 
-  req.on('data', function(data) { item += data; });
-  req.on('end', function() {
+  req.on('data', (data) => { item += data; });
+  req.on('end', () => {
     items.push(item);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.end('Insert OK!');
@@ -87,8 +87,8 @@ function change(req, res) {
 
   var item = '';
   res.setHeader('Access-Control-Allow-Origin', '*');
-  req.on('data', function(chunk) { item += chunk; });
-  req.on('end', function() {
+  req.on('data', (chunk) => { item += chunk; });
+  req.on('end', () => {
     var i = parseInt(arg[1]);
 
     if(!items[i]) {
@@ -109,7 +109,7 @@ function loadData() {
   } catch(e) { return []; }
 }
 
-process.on('SIGINT', function() {
+process.on('SIGINT', () => {
   fs.writeFileSync('./data.txt', JSON.stringify(items));
   process.exit();
 });

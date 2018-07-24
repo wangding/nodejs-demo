@@ -9,11 +9,11 @@ const station = {
 
 var radio = new Radio(station);
 
-radio.on('open', function(station) {
+radio.on('open', (station) => {
   console.log('"%s" FM %s opened', station.name, station.freq);
   console.log('lalala...');
 });
 
-radio.on('stop', function(station) {
+radio.on('stop', (station) => {
   console.log('"%s" FM %s closed', station.name, station.freq);
 });

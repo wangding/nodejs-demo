@@ -9,7 +9,7 @@ log(msg[0] + ':');
 
 const stdin = process.stdin;
 
-stdin.on('data', function(data) {
+stdin.on('data', (data) => {
   eval('me.' + msg[i-1] + '= "' + data.slice(0, data.length-1) + '"');
   if(i === 4) {
     log(me);
@@ -19,7 +19,7 @@ stdin.on('data', function(data) {
   }
 });
 
-stdin.on('end', function() {
+stdin.on('end', () => {
   log(me);
 });
 

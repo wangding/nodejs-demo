@@ -1,11 +1,11 @@
 #!/usr/bin/node
 
-var http = require('http');
-var qs = require('querystring');
+const http = require('http'),
+      qs   = require('querystring');
 
 var items = [];
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   if(req.url != '/') {
     err(res);
     return;

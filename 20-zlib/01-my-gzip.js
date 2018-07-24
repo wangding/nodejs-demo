@@ -20,7 +20,7 @@ const dst = src + '.gz';
 
 var buf = fs.readFileSync(src);
 
-zlib.gzip(buf, function(err, data) {
+zlib.gzip(buf, (err, data) => {
   console.log('%s size: %d byte', src, buf.length);
   console.log('%s size: %d byte', dst, data.length);
   fs.writeFileSync(dst, data);

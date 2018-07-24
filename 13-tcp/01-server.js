@@ -1,14 +1,14 @@
 #!/usr/bin/node
 
-var server = require('net').createServer();
-var fs = require('fs');
+const server = require('net').createServer(),
+      fs     = require('fs');
 
-server.on('connection', function(socket) {
+server.on('connection', (socket) => {
   console.log('new connection from', socket.remoteAddress);
 
   socket.setEncoding('utf8');
 
-  socket.on('data', function(data) {
+  socket.on('data', (data) => {
     var cmd = data.slice(0, data.length-2);
 
     console.log(socket.remoteAddress + ':' + socket.remotePort + ' > ' + cmd);
@@ -31,10 +31,10 @@ server.on('connection', function(socket) {
     }
   });
 
-  socket.on('end', function() {
+  socket.on('end', () => {
     console.log(socket.remoteAddress, 'disconnected');
   });
-}).listen(8080, function() {
+}).listen(8080, () => {
   console.log('TCP server is listening on port 8080');
 });
 

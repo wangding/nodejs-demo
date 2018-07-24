@@ -10,7 +10,7 @@ function Dog(name, energy) {
   _name = name;
   _energy = energy;
 
-  var timer = setInterval(function() {
+  var timer = setInterval(() => {
     if(energy > 0) {
       that.emit('bark');
       _energy--;
@@ -21,13 +21,9 @@ function Dog(name, energy) {
     }
   }, 1000);
 
-  this.name = function() {
-    return _name;
-  };
+  this.name = () => _name;
     
-  this.energy = function() {
-    return _energy;
-  };
+  this.energy = () => _energy;
 }
 
 Dog.prototype = EventEmitter.prototype;

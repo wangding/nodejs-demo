@@ -11,7 +11,7 @@ var root = path.isAbsolute(www) ? www : path.join(__dirname, www);
 
 console.log('root:', root);
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   console.log(req.headers);
   console.log('');
 

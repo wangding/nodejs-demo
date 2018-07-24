@@ -2,8 +2,8 @@
 
 const pi = Math.PI;
 
-module.exports.diameter = function(radius) { return 2 * radius; };
-module.exports.circumference = function(radius) { return pi * 2 * radius; };
-module.exports.area = function(radius) { return pi * radius * radius; };
+module.exports.diameter = (radius) => 2 * radius;
+module.exports.circumference = (radius) => pi * 2 * radius;
+module.exports.area = (radius) => pi * radius * radius;
 
 console.dir(module);

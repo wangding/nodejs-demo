@@ -9,11 +9,11 @@ function Radio(station) {
     this[m] = EventEmitter.prototype[m];
   }
 
-  setTimeout(function() {
+  setTimeout(() => {
     that.emit('play', station);
   }, 0);
 
-  setTimeout(function() {
+  setTimeout(() => {
     that.emit('stop', station);
   }, 5000);
 }

@@ -1,11 +1,11 @@
 #!/usr/bin/node
 
-var http = require('http');
-var cp = require('child_process');
+const http = require('http'),
+      cp   = require('child_process');
 
 console.log('I am father process. PID:', process.pid);
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   var child = cp.spawn('./02-child.js');
 
   child.stdout.pipe(res);

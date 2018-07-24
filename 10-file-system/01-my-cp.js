@@ -9,7 +9,7 @@ var sta, stm;
 if(fs.existsSync(src)) {
   stm = fs.createReadStream(src).pipe(fs.createWriteStream(dst));
   
-  stm.on('close', function() {
+  stm.on('close', () => {
     sta = fs.statSync(src);
     fs.chmodSync(dst, sta.mode);
   });

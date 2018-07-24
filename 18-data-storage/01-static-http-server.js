@@ -5,7 +5,7 @@ const http = require('http'),
 
 var buf = {};
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   sendFile(res, req.url);
 }).listen(8080);
 

@@ -26,7 +26,7 @@ var html = '<!DOCTYPE html><html><body><img alt="'
       + path.basename(file, ext) 
       + '" src="' + uriData + '"></body></html>';
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   console.log(req.headers);
   res.end(html);
 }).listen(8080);

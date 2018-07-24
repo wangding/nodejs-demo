@@ -3,19 +3,19 @@
 const EventEmitter = require('events').EventEmitter;
 var e = new EventEmitter();
 
-setInterval(function() {
+setInterval(() => {
   e.emit('hello');
 }, 1000);
 
-setTimeout(function() {
+setTimeout(() => {
   e.emit('bye');
 }, 5000);
 
-e.on('hello', function() {
+e.on('hello', () => {
   console.log('hello world!');
 });
 
-e.on('bye', function() {
+e.on('bye', () => {
   console.log('goodbye!');
   process.exit();
 });

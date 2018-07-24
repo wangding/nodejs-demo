@@ -3,7 +3,8 @@
 const http = require('http');
 
 const server = http.createServer();
-server.on('request', function(req, res) {
+
+server.on('request', (req, res) => {
   res.end('hello');
 });
 

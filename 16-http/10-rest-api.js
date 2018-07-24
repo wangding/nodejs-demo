@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
-var http = require('http');
+const http = require('http');
 var items = [];
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   console.log(req.headers);
   console.log('');
 
@@ -86,8 +86,8 @@ function change(req, res) {
 
   var item = '';
   res.setHeader('Access-Control-Allow-Origin', '*');
-  req.on('data', function(chunk) { item += chunk; });
-  req.on('end', function() {
+  req.on('data', (chunk) => { item += chunk; });
+  req.on('end', () => {
     var i = parseInt(arg[1]);
 
     if(!items[i]) {

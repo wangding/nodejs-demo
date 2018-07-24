@@ -9,6 +9,6 @@ function loop() {
   console.log('I will loop forever!');
 }
 
-setTimeout(function() {
+setTimeout(() => {
   console.log('Game Over!');
 }, 5000);

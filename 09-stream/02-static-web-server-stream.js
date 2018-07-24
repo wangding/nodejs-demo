@@ -7,7 +7,7 @@ const http = require('http'),
 var web = http.createServer();
 web.listen(8080);
 
-web.on('request', function(req, res) {
+web.on('request', (req, res) => {
   log('==========');
   log(req.headers);
 
@@ -15,7 +15,7 @@ web.on('request', function(req, res) {
 
   /*
   var s = fs.createReadStream(file);
-  s.on('error', function(err) {
+  s.on('error', (err) => {
     console.log(err.message);
     res.statusCode = 404;
     res.end(err.message);

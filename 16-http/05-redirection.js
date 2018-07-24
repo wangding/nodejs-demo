@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
-var http = require('http'),
-    url  = require('url');
+const http = require('http'),
+      url  = require('url');
 
 var addr = process.argv[2] || 'http://www.sian.com/';
 
@@ -15,7 +15,7 @@ function opt(addr) {
 }
 
 function get(options) {
-  http.get(options, function(res) {
+  http.get(options, (res) => {
     console.log('status:', res.statusCode);
     console.log('status message:', res.statusMessage);
     console.log('HTTP version:', res.httpVersion);

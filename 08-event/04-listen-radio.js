@@ -8,11 +8,11 @@ const Radio   = require('./04-radio.js'),
 
 var r = new Radio(station);
 
-r.on('play', function(station) {
+r.on('play', (station) => {
   console.log('FM %s %s is playing!', station.freq, station.name);
 });
 
-r.on('stop', function(station) {
+r.on('stop', (station) => {
   console.log('FM %s %s is stop!', station.freq, station.name);
 });
 

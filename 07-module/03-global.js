@@ -3,7 +3,7 @@
 /*global pi:true */
 global.pi = Math.PI;
 
-global.circle = function(radius) {
+global.circle = (radius) => {
   function circumference() {
     return pi * 2 * radius;
   }
@@ -19,8 +19,8 @@ global.circle = function(radius) {
 };
 
 global.objCircle = {
-  diameter : function(radius) { return 2 * radius; },
-  circumference : function(radius) { return pi * 2 * radius; },
-  area : function(radius) { return pi * radius * radius; }
+  diameter : (radius) => 2 * radius,
+  circumference : (radius) => pi * 2 * radius,
+  area : (radius) => pi * radius * radius
 };
 

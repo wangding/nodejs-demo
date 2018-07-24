@@ -2,7 +2,7 @@
 
 console.log('I am child process. PID:', process.pid);
 
-process.on('message', function(msg) {
+process.on('message', (msg) => {
   console.log('msg from father:', msg);
 });
 

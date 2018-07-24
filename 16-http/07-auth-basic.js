@@ -1,8 +1,8 @@
 #!/usr/bin/node
-var server = require('http').createServer();
-var assert = require('assert');
+const server = require('http').createServer(),
+      assert = require('assert');
 
-server.on('request', function (req, res) {
+server.on('request', (req, res) => {
   console.log(req.headers);
 
   switch(req.url) {
