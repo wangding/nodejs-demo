@@ -10,7 +10,7 @@ log(msg[0] + ':');
 const stdin = process.stdin;
 
 stdin.on('data', (data) => {
-  eval('me.' + msg[i-1] + '= "' + data.slice(0, data.length-1) + '"');
+  me[msg[i-1]] = data.slice(0, data.length - 1).toString('utf8');
   if(i === 4) {
     log(me);
     process.exit();
