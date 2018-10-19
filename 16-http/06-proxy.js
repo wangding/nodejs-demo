@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
 const http = require('http'),
-      url = require('url');
+      url  = require('url');
 
 http.createServer((req, res) => {
   console.log(req.headers);
@@ -14,7 +14,7 @@ http.createServer((req, res) => {
       console.log(chunk.toString('utf8'));
       res.write(chunk, 'binary'); 
     });
-    proxyResponse.on('end', () => { res.end();});
+    proxyResponse.on('end', () => { res.end(); });
 
     console.log(proxyResponse.statusCode, proxyResponse.headers);
     res.writeHead(proxyResponse.statusCode, proxyResponse.headers);

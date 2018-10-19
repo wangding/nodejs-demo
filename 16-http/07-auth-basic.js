@@ -1,4 +1,5 @@
 #!/usr/bin/node
+
 const server = require('http').createServer(),
       assert = require('assert');
 
@@ -41,12 +42,17 @@ function sendNormalMsg(res) {
 
 function sendSecretMsg(req, res) {
   if(req.headers.authorization) {
-    console.log('auth:', userNamePasswd(req.headers.authorization));
-    res.end('OK! my mobile: 13582027613');
-  } else {
-    res.writeHead(401, {'WWW-Authenticate': 'Basic'});
-    res.end('who you are?');
-  }
+    var usr = userNamePasswd(req.headers.authorization);
+    console.log('\nauth:', usr);
+
+    if(usr.userName === 'wangding' && usr.passWord === '123') {
+      res.end('OK! wangding\'s mobile number: 13582027613');
+      return;
+    }
+  } 
+
+  res.writeHead(401, {'WWW-Authenticate': 'Basic'});
+  res.end('who you are?');
 }
 
 function sendErrorMsg(res) {

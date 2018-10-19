@@ -4,19 +4,14 @@ const http = require('http'),
       url  = require('url');
 
 var addr = process.argv[2] || 'http://sample.wangding.in/web/one-div.html';
-var options = url.parse(addr);
+var options = url.parse(global.encodeURI(addr));
 
-options.method = 'GET';
 options.headers = {
-  'User-Agent': '02-my-curl.js'
+  'User-Agent': '01-my-curl.js'
 };
 
 http.get(options, (res) => {
-  console.log('status:', res.statusCode);
-  console.log('status message:', res.statusMessage);
-  console.log('HTTP version:', res.httpVersion);
-  console.log('');
-
+  console.log(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
   console.log(res.headers);
   console.log('');
 
