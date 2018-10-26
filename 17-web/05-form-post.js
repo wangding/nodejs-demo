@@ -42,8 +42,8 @@ function show(res) {
             + items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n')
             + '    </ul>\n'
             + '    <form method="post" action="/">\n'
-            + '       <p><input type="text" name="item" /></p>\n'
-            + '       <p><input type="submit" value="Add Item" /></p>\n'
+            + '       <p><input type="text" name="item" />'
+            + '       <input type="submit" value="Add Item" /></p>\n'
             + '    </form>\n'
             + '  </body>\n'
             + '</html>';

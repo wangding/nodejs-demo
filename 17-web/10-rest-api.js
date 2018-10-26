@@ -75,10 +75,6 @@ function del(req, res) {
 }
 
 function change(req, res) {
-  //console.log('PUT');
-  //console.log(req.url);
-  //console.log(req.url.split('/'));
-
   var arg = req.url.split('/');
   if(arg[1] === '') {
     items = [];
