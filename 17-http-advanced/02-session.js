@@ -4,7 +4,7 @@ const http = require('http');
 
 var sessions = {},            // 存放 Session 的字典
     key      = 'SessionID',
-    EXPIRES  = 10 * 60 * 1000;
+    EXPIRES  = 5 * 1000;
 
 function genSession() {
   var session = {
@@ -55,4 +55,4 @@ http.createServer((req, res) => {
 
   res.setHeader('Set-cookie', `${key}=${req.session.id}`);
   res.end('hello world!');
-}).listen(3000);
+}).listen(8080);
