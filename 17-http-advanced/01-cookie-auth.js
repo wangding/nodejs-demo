@@ -75,10 +75,11 @@ function showHome(res) {
             + '<html>'
             + '  <head>'
             + '    <meta charset="UTF-8">'
-            + '    <title>首页</title>'
+            + '    <title>home</title>'
             + '  </head>'
           + '    <body>'
-          + '       <h1>Hello World!</h1>'
+          + '       <h1>This is home page, you are login!</h1>'
+          + '       <a href="/logout">logout</a>'
           + '    </body>'
             + '</html>';
 

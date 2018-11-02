@@ -1,9 +1,15 @@
 #!/usr/bin/node
 
 const http = require('http');
-var count;
+var total = 0;
 
 http.createServer((req, res) => {
+  console.log('Total request:', ++total);
+
+  if(req.url === '/favicon.ico') return;
+  
+  var count;
+
   if(typeof req.headers['cookie'] === 'undefined') {
     count = 1;
   } else {

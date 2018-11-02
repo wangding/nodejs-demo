@@ -11,6 +11,11 @@ http.createServer((req, res) => {
   log('');
 
   if(req.method === 'POST') {
+    if(req.url !== '/upload') {
+      show(res, errorPage);
+      return;
+    }
+
     req.setEncoding('binary');
     var file;
     req.on('data', (data)=>{
