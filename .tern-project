@@ -1,6 +1,9 @@
 {
   "libs": ["browser", "jquery"],
   "plugins": {
-    "node": {}
+    "node": {},
+    "modules": {
+      "modules": "./node_modules/express/index.js"
+    }
   }
 }

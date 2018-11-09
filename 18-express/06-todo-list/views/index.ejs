@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <form action="/" method="post">
+      <input type="text" name="item">
+      <input type="submit" value="Add Item">
+    </form>
+    <ul><%- items.map(function(item){ return '<li>' + item + '</li>'; }).join('\n') %></ul>
+  </body>
+</html>
