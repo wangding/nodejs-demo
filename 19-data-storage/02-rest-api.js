@@ -31,7 +31,6 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function get(res) {
-  //console.log('GET');
   var body = JSON.stringify(items);
 
   res.setHeader('Content-Length', Buffer.byteLength(body));
@@ -41,7 +40,6 @@ function get(res) {
 }
 
 function insert(req, res) {
-  //console.log('POST');
   var item = '';
 
   req.on('data', (data) => { item += data; });
@@ -53,10 +51,6 @@ function insert(req, res) {
 }
 
 function del(req, res) {
-  //console.log('DELETE');
-  //console.log(req.url);
-  //console.log(req.url.split('/'));
-
   var arg = req.url.split('/');
   if(arg[1] === '') {
     items = [];
@@ -76,10 +70,6 @@ function del(req, res) {
 }
 
 function change(req, res) {
-  //console.log('PUT');
-  //console.log(req.url);
-  //console.log(req.url.split('/'));
-
   var arg = req.url.split('/');
   if(arg[1] === '') {
     items = [];

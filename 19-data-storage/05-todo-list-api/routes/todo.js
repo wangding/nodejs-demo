@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   res.header('Access-Control-Allow-Origin', '*');
-  if(req.body.item !== '') {
+  if(req.body !== '') {
     todo.addItem(req.body.item, (err) => {
       if(err) {
         console.error(err);

@@ -6,23 +6,24 @@ const http = require('http'),
 var buf = {};
 
 http.createServer((req, res) => {
-  sendFile(res, req.url);
+  sendFile(req, res);
 }).listen(8080);
 
-function sendFile(res, url) {
-  var file = __dirname + url;
+function sendFile(req, res) {
+  var file = __dirname + req.url;
 
   if(!buf[file]) {
     if(!fs.existsSync(file)) {
       res.statusCode = 404;
-      res.end('%s not exist!', file);
+      res.end(`${file} not exist!`);
       
       return;
     }
 
+    console.log('Disk IO:', file);
     buf[file] = fs.readFileSync(file);   
   }
 
   res.end(buf[file]);
-  console.log('\n', buf, '\n');
+  //console.log('\n', buf, '\n');
 }
