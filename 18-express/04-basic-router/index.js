@@ -28,4 +28,15 @@ app.get('/download', function(req, res) {
   res.download('package.json');
 });
 
+app.get('/courses/:id', function(req, res) {
+  console.log('id:', req.params.id);
+  res.send('ok!');
+});
+
+app.get('/posts/:year/:month', function(req, res) {
+  console.log('year:', req.params.year);
+  console.log('month:', req.params.month);
+  res.send('ok!');
+});
+
 app.listen(8080);
