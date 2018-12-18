@@ -1,0 +1,16 @@
+{
+  "name": "06-upload-pic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "wangding",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "jsdom": "^13.1.0"
+  }
+}
