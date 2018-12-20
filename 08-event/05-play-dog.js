@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const Dog = require('./05-dog.js');
 

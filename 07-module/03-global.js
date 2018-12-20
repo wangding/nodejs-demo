@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 /*global pi:true */
 global.pi = Math.PI;

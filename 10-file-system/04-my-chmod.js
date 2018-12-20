@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs  = require('fs'),
       mod = process.argv[2],

@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const Radio   = require('./04-radio.js'),
       station = {

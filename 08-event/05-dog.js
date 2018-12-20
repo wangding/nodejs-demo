@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 function Dog(name, energy) {
   var _listeners = {};

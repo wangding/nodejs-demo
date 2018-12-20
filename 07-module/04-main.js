@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const Num = require('./04-share.js'),
       log = console.log;

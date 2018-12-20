@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       fs   = require('fs'),
@@ -13,9 +13,7 @@ http.createServer((req, res) => {
   log(req.headers);
   log('');
 
-  if(req.method === 'GET' && req.url === 'images') {
-    
-  }
+  // if(req.method === 'GET' && req.url === 'images') {}
 
   if(req.method === 'POST') {
     if(req.url !== '/upload') {

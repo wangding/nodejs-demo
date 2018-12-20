@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const stdin  = process.stdin,
       stdout = process.stdout;

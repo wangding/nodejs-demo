@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 if(process.argv.length !== 3) {
   console.error('命令行格式：cmd base64_string');

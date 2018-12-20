@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 function makeLoad() {
   for(var i=0; i<100000000000; i++);

@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 /*
 var pi = require('./02-export-var.js');

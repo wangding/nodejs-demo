@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 var Radio = function(station) {
   var _listeners = {};

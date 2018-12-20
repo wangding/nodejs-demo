@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const EventEmitter = require('events').EventEmitter;
 var e = new EventEmitter();

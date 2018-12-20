@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 var assert = require('assert');
 var Todo = require('./todo');

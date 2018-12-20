@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 module.exports = {
   pi: require('./02-export-var'),

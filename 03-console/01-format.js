@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const user = { 
   name: '王顶',
@@ -16,7 +16,7 @@ log('JSON: %j', user);
 // 输出方式一：占位符输出
 log('qq: %s', user.qq);
 
-// 输出方式二：逗号间隔，多变量输出
+// 输出方式二：空格间隔，多变量输出
 log('qq:', user.qq);
 
 // 输出方式三：拼接字符串输出
