@@ -2,10 +2,8 @@
 
 const http    = require('http'),
       cheerio = require('cheerio'),
-      log     = console.log;
-
-
-var addr = 'http://edu.51cto.com/courselist/index-zh5.html';
+      log     = console.log,
+      addr    = 'http://edu.51cto.com/courselist/index-zh5.html';
 
 http.get(addr, (res) => {
   var result = '';
