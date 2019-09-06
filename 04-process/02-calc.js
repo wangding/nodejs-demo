@@ -23,5 +23,10 @@ function help() {
 }
 
 function calc() {
-  log(arg + '=%s', eval(arg));
+  try {
+    log(arg + '=%s', eval(arg));
+  } catch(e) {
+    console.error('%s 不是合法的数学表达式！', arg);
+  }
 }
+

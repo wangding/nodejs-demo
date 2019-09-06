@@ -2,16 +2,15 @@
 
 const log = console.log;
 
-log('process id:', process.pid);
+log('PID:', process.pid);
 
 process.stdin.resume();
 
 process.on('SIGINT', () => {
-  log('your press ctrl-c, good bye');
+  log('You have pressed Ctrl + C. Good bye!');
   process.exit();
 });
 
 process.on('SIGTSTP', () => {
-  log('you press ctrl-z, stop running');
-  process.exit();
+  log('You have pressed Ctrl + Z.');
 });
