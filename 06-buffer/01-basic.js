@@ -26,7 +26,7 @@ log('\nbuf2\'s JSON:', JSON.stringify(buf2));
 var array = ['a', 0xba, 0xdf, 0x00, 255, 10];
 var buf3 = new Buffer(array);
 
-log('\nbuf3:', buf1.length, buf3);
+log('\nbuf3:', buf3.length, buf3);
 
 // 用字符串初始化 buffer
 var buf4 = new Buffer('hello world', 'utf8');
