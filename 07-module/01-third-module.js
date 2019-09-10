@@ -1,6 +1,8 @@
 #!/usr/bin/node
 
-const now = require('date-now');
+const chalk = require('chalk'),
+      log   = console.log;
 
-console.log(now());
-console.log(Date.now());
+log('This is ' + chalk.red('red.'));
+log('This is ' + chalk.green('green.'));
+log('This is ' + chalk.red('red') + ' and ' + chalk.green('green.'));

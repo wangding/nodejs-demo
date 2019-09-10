@@ -1,18 +1,16 @@
 #!/usr/bin/node
 
-const Num = require('./04-share.js'),
-      log = console.log;
+const Circle = require('./04-export-object.js'),
+      chalk = require('chalk'),
+      log   = console.log,
+      info  = chalk.greenBright;
 
-var n1 = new Num();
-var n2 = new Num();
+var c = new Circle(20);
 
-n1.add();
-n1.add();
+log(info('-----------------------------------'));
+log(info(`area:         \t${c.area()}`));
+log(info(`diameter:     \t${c.diameter()}`));
+log(info(`circumference:\t${c.circumference()}`));
+log(info('-----------------------------------'));
 
-log('n1:', n1.getCount());
-log('n2:', n2.getCount());
-
-n2.add();
-
-log('n1:', n1.getCount());
-log('n2:', n2.getCount());
+log(module);

@@ -1,15 +1,14 @@
 #!/usr/bin/node
 
-const circle = require('./03-export-function.js'),
+const circle = require('./06-export-object.js'),
       chalk = require('chalk'),
       log   = console.log,
       info  = chalk.greenBright;
 
-var c = circle(20);
-
 log(info('-----------------------------------'));
-log(info(`area:         \t${c.area()}`));
-log(info(`circumference:\t${c.circumference()}`));
+log(info(`area:         \t${circle.area(20)}`));
+log(info(`diameter:     \t${circle.diameter(20)}`));
+log(info(`circumference:\t${circle.circumference(20)}`));
 log(info('-----------------------------------'));
 
 log(module);

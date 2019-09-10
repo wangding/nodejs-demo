@@ -8,4 +8,4 @@ module.exports = {
   area: (radius) => pi * radius * radius
 };
 
-console.dir(module);
+console.log(module);

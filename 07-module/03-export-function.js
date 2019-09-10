@@ -17,4 +17,4 @@ module.exports = (radius) => {
   };
 };
 
-console.dir(module);
+console.log(module);
