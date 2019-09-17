@@ -19,4 +19,3 @@ MyTransform.prototype._transform = function(chunk, encoding, callback) {
 var tf = new MyTransform();
 
 stdin.pipe(tf).pipe(stdout);
-

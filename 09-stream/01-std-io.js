@@ -9,7 +9,7 @@ stdin.on('data', (data) => {
   stdout.write(data);
 });
 
-stdin.push('hello world!');
+stdin.push('hello world!\n');
 //stdin.push(null);
 
 //stdin.pipe(stdout);
