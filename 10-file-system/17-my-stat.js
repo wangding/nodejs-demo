@@ -5,7 +5,7 @@ const fs  = require('fs'),
 
 try{
   console.log(fs.statSync(src));
-} catch(err) {
-  console.error(err.message);
+} catch(e) {
+  console.error(e.message);
   process.exit(1);
 }

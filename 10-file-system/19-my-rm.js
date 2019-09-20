@@ -34,4 +34,3 @@ function deleteDir(folder) {
 
   fs.rmdirSync(folder);
 } 
-
