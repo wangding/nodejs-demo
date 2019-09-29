@@ -4,9 +4,9 @@ const http = require('http'),
       url  = require('url'),
       log  = console.log;
 
-var msg = process.argv[2] || 'Hello! I am wangding.';
+var msg     = process.argv[2] || 'Hello! I am wangding.',
+    options = url.parse('http://localhost:8080');
 
-var options = url.parse('http://localhost:8080');
 options.method = 'POST';
 
 var req = http.request(options, (res) => {

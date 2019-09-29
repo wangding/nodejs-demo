@@ -4,7 +4,7 @@ const http = require('http'),
       log  = console.log;
 
 http.createServer((req, res) => {
-  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(`\n${req.method} ${req.url} HTTP/${req.httpVersion}`);
   log(req.headers);
   log('');
 
