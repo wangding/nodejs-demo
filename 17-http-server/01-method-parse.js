@@ -28,21 +28,17 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function select(req, res) {
-  send(res);
+  res.end(req.method);
 }
 
 function create(req, res) {
-  send(res);
+  res.end(req.method);
 }
 
 function update(req, res) {
-  send(res);
+  res.end(req.method);
 }
 
 function remove(req, res) {
-  send(res);
-}
-
-function send(res) {
-  res.end('OK!');
+  res.end(req.method);
 }

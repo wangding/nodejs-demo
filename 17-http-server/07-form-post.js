@@ -1,23 +1,34 @@
 #!/usr/bin/node
 
 const http = require('http'),
-      url  = require('url'),
+      log  = console.log,
       qs   = require('querystring');
 
 var items = [];
 
 http.createServer((req, res) => {
-  var path = url.parse(req.url).pathname;
-
-  if(path != '/') {
+  if(req.url != '/') {
     err(res);
     return;
   }
 
-  console.log(req.headers);
-  console.log('');
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log('');
 
-  add(req, res);
+  switch(req.method) {
+    case 'GET':
+      show(res);
+      break;
+
+    case 'POST':
+      add(req, res);
+      break;
+
+    default:
+      err(res);
+      break;
+  }
 }).listen(8080);
 
 function show(res) {
@@ -29,13 +40,13 @@ function show(res) {
             + '  </head>\n'
             + '  <body>\n'
             + '    <h1>Todo List</h1>\n'
-            + '    <ul>\n'
-            + items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n')
-            + '    </ul>\n'
-            + '    <form method="get" action="/">\n'
+            + '    <form method="post" action="/">\n'
             + '       <p><input type="text" name="item" />'
             + '       <input type="submit" value="Add Item" /></p>\n'
             + '    </form>\n'
+            + '    <ul>\n'
+            + items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n')
+            + '    </ul>\n'
             + '  </body>\n'
             + '</html>';
 
@@ -47,11 +58,18 @@ function show(res) {
 }
 
 function add(req, res) {
-  var value = qs.parse(url.parse(req.url).query).item;
+  var body = '';
 
-  if(typeof value !== 'undefined') items.push(value);
+  req.on('data', function(chunk) { body += chunk; });
+  req.on('end', function() {
+    log(body);
+    
+    if(body != '') {
+      items.push(qs.parse(body).item);
+    }
 
-  show(res);
+    show(res);
+  });
 }
 
 function err(res) {

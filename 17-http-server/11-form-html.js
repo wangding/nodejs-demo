@@ -2,6 +2,7 @@
 
 const http = require('http'),
       fs   = require('fs'),
+      log  = console.log,
       qs   = require('querystring');
 
 var items = [];
@@ -9,8 +10,9 @@ var items = [];
 http.createServer(function(req, res) {
   if(req.url != '/') { return err(res); }
 
-  console.log(req.headers);
-  console.log('');
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log('');
 
   switch(req.method) {
     case 'GET':
@@ -37,7 +39,7 @@ function err(res) {
 }
 
 function show(res) {
-  var html = fs.readFileSync('./template.html').toString('utf8'),
+  var html = fs.readFileSync('./11-template.html').toString('utf8'),
       items_html = items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n');
 
   html = html.replace('%', items_html); 

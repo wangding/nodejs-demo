@@ -2,7 +2,7 @@
 
 const http = require('http'),
       url  = require('url'),
-      querystring = require('querystring'),
+      qs   = require('querystring'),
       log  = console.log;
 
 http.createServer((req, res) => {
@@ -26,9 +26,8 @@ function parseURL(strURL) {
   log('pathname:', path.pathname);
   log('search:', path.search);
   log('query:', path.query);
-  log('slashes:', path.slashes);
   log('hash:', path.hash);
 
   log('URL parse:', path.pathname.split('/'));
-  log('QueryString parse:', querystring.parse(path.query));
+  log('QueryString parse:', qs.parse(path.query));
 }
