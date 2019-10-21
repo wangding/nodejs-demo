@@ -8,7 +8,7 @@ http.createServer((req, res) => {
 
   if(req.url === '/favicon.ico') return;
   
-  var count;
+  var count = 1;
 
   if(typeof req.headers['cookie'] === 'undefined') {
     count = 1;

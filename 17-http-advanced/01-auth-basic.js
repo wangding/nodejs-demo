@@ -1,10 +1,13 @@
 #!/usr/bin/node
 
 const server = require('http').createServer(),
+      log    = console.log,
       assert = require('assert');
 
 server.on('request', (req, res) => {
-  console.log(req.headers);
+  log(`\n\n${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log();
 
   switch(req.url) {
     case '/':
