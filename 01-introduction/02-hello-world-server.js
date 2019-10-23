@@ -3,5 +3,5 @@
 const http = require('http');
 
 http.createServer((req, res) => {
-  res.end('hello world');
+  res.end('Hello world!');
 }).listen(8080);
