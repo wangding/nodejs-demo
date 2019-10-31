@@ -15,5 +15,3 @@ r.on('play', (station) => {
 r.on('stop', (station) => {
   console.log('FM %s %s is stop!', station.freq, station.name);
 });
-
-

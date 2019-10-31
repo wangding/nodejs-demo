@@ -3,12 +3,11 @@
 const EventEmitter = require('events').EventEmitter;
 
 function Dog(name, energy) {
-  var _name, _energy;
-  var that = this;
+  var _name   = name,
+      _energy = energy,
+      that    = this;
 
   EventEmitter.call(this);
-  _name = name;
-  _energy = energy;
 
   var timer = setInterval(() => {
     if(energy > 0) {
@@ -17,12 +16,11 @@ function Dog(name, energy) {
     }
 
     if(_energy < 0) {
-      global.clearInterval(timer);
+      clearInterval(timer);
     }
   }, 1000);
 
   this.name = () => _name;
-    
   this.energy = () => _energy;
 }
 

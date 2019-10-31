@@ -1,7 +1,8 @@
 #!/usr/bin/node
 
-const EventEmitter = require('events').EventEmitter;
-var e = new EventEmitter();
+const EventEmitter = require('events').EventEmitter,
+      log          = console.log,
+      e            = new EventEmitter();
 
 setInterval(() => {
   e.emit('hello');
@@ -12,11 +13,10 @@ setTimeout(() => {
 }, 5000);
 
 e.on('hello', () => {
-  console.log('hello world!');
+  log('hello world!');
 });
 
 e.on('bye', () => {
-  console.log('goodbye!');
+  log('goodbye!');
   process.exit();
 });
-
