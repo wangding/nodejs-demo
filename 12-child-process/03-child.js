@@ -7,6 +7,6 @@ const timer = setInterval(() => {
 }, 2000);
 
 setTimeout(() => {
-  global.clearInterval(timer);
+  clearInterval(timer);
   console.log('OK! 16 seconds. Game Over!');
 }, 16000);
