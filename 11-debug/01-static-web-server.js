@@ -6,8 +6,9 @@ const http = require('http'),
       fs   = require('fs');
 
 http.createServer((req, res) => {
-  log('==========');
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
   log(req.headers);
+  log('');
 
   var file = __dirname + req.url;
   fs.readFile(file, (err, data) => {
