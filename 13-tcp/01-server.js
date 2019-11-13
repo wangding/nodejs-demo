@@ -1,17 +1,18 @@
 #!/usr/bin/node
 
 const server = require('net').createServer(),
+      log    = console.log,
       fs     = require('fs');
 
 server.on('connection', (socket) => {
-  console.log('new connection from', socket.remoteAddress);
+  log('new connection from', socket.remoteAddress);
 
   socket.setEncoding('utf8');
 
   socket.on('data', (data) => {
     var cmd = data.slice(0, data.length-2);
 
-    console.log(socket.remoteAddress + ':' + socket.remotePort + ' > ' + cmd);
+    log(socket.remoteAddress + ':' + socket.remotePort + ' > ' + cmd);
 
     switch(cmd) {
       case 'ls':
@@ -32,10 +33,10 @@ server.on('connection', (socket) => {
   });
 
   socket.on('end', () => {
-    console.log(socket.remoteAddress, 'disconnected');
+    log(socket.remoteAddress, 'disconnected');
   });
 }).listen(8080, () => {
-  console.log('TCP server is listening on port 8080');
+  log('TCP server is listening on port 8080');
 });
 
 
