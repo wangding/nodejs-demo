@@ -8,9 +8,11 @@ http.createServer((req, res) => {
   log(req.headers);
   log();
 
-  log(req.headers['cookie']);
-  log(req.headers['cookie'].split(';'));
+  if(typeof req.headers['cookie'] === 'undefined') {
+    res.setHeader('Set-cookie', ['name=wangding; Httponly', 'age=42; max-age=1000']);
+  } else {
+    log(req.headers['cookie']);
+  }
 
-  res.setHeader('Set-cookie', ['name=wangding; Httponly', 'age=42; max-age=1000']);
-  res.end('hello world!');
+  res.end('hello cookie!');
 }).listen(8080);

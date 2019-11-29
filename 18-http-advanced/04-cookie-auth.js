@@ -1,6 +1,7 @@
 #!/usr/bin/node
 
 const http = require('http'),
+      log  = console.log,
       qs   = require('querystring');
 
 var isLogin;
@@ -15,7 +16,7 @@ http.createServer((req, res) => {
     isLogin = (pair[1] === 'true');
   }
 
-  console.log(isLogin);
+  log('isLogin:', isLogin);
 
   if(req.method === 'POST' && req.url === '/login') {
     req.on('data', (chunk) => { data += chunk; });
@@ -78,7 +79,7 @@ function showHome(res) {
             + '    <title>home</title>'
             + '  </head>'
           + '    <body>'
-          + '       <h1>This is home page, you are login!</h1>'
+          + '       <h1>This is home page, you have logined!</h1>'
           + '       <a href="/logout">logout</a>'
           + '    </body>'
             + '</html>';
