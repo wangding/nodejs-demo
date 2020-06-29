@@ -1,57 +1,80 @@
 #!/usr/bin/node
 
 const mysql = require('mysql'),
+      log   = console.log,
       con   = mysql.createConnection({
-        host: 'localhost',
+        host: '192.168.133.144',
         user: 'root',
         password: 'ddd',
         database: 'test'
       });
 
-con.connect();
+function insert() {
+  const sql = 'insert into books(title, status) values(?, ?, ?)',
+        data = ['wangding', 0];
 
-/*/ 增
-con.query('insert into books(book_id, title, status) values(?, ?, ?)',
-    ['103', 'wangding', 0], (err, result) => {
-      if(err) {
-        console.error(err.message);
-        process.exit(1);
-      }
+  con.connect();
+  con.query(sql, data, (err, result) => {
+    log(result);
+    con.end();
+  });
+}
 
-      console.log(result);
+function update() {
+  const sql = 'update books set title = ? where book_id = ?',
+        data= ['hello world', 103];
+
+  con.connect();
+  con.query(sql, data, (err, result) => {
+    log(result);
+    con.end();
+  });
+}
+
+function del() {
+  const sql = 'delete from books where status = ?';
+
+  con.connect();
+  con.query(sql, [1], (err, result) => {
+    log(result);
+    con.end();
+  });
+}
+
+function select() {
+  const sql = 'select * from books';
+
+  con.connect();
+  con.query(sql, (err, result) => {
+    log('id\tstatus\ttitle');
+    log('--------------------------------------');
+    result.forEach((row) => {
+      log(`${row.book_id}\t${row.status}\t${row.title}`);
     });
+    log('--------------------------------------');
+    con.end();
+  });
+}
 
-// 改
-con.query('update books set title = ? where book_id = ?', 
-    ['hello world', 103], (err, result) => {
-      if(err) {
-        console.error(err.message);
-        process.exit(1);
-      }
+/* -------------------------------- */
 
-      console.log(result);
-    });
-*/
-// 删
-con.query('delete from books where book_id = ?', [103], (err, result) => {
-  if(err) {
-    console.error(err.message);
-    process.exit(1);
-  }
+switch(process.argv[2]) {
+  case 'insert':
+    insert();
+    break;
 
-  console.log(result);
-});
-//*/
-// 查询
-con.query('select * from books', (err, result) => {
-  if(err) {
-    console.error(err.message);
-    process.exit(1);
-  }
+  case 'update':
+    update();
+    break;
 
-  console.log(result);
-});
+  case 'delete':
+    del();
+    break;
 
+  case 'select':
+    select();
+    break;
 
-con.end();
-
+  default:
+    log('app opt');
+}
