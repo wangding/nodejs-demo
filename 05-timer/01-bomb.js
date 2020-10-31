@@ -1,21 +1,33 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-function Bomb(id) {
-  var _id = id, timeID;
+/* this code need node v12+ */
 
-  this.start = () => {
-    console.log('#%d It will bomb after 3 second!', _id);
-    timeID = setTimeout(()=>{
-      console.log('#%d Bomb!', _id);
+const log = console.log;
+
+class Bomb {
+  #id;
+  #timerID;
+
+  constructor(id) {
+    this.#id = id;
+  }
+
+  start() {
+    log(`#${this.#id} It will bomb after 3 second!`);
+    this.#timerID = setTimeout(() => {
+      log(`#${this.#id} BOMB!!!`);
     }, 3000);
-  };
+  }
 
-  this.clear = () => { clearTimeout(timeID); };
+  clear() {
+    clearTimeout(this.#timerID);
+    log(`#${this.#id} is safe!`);
+  }
 }
 
-var b1 = new Bomb(1);
+let b1 = new Bomb(1);
 b1.start();
 
-var b2 = new Bomb(2);
+let b2 = new Bomb(2);
 b2.start();
-setTimeout(b2.clear, 1000);
+setTimeout(b2.clear.bind(b2), 1000);
