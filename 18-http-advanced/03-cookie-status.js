@@ -1,8 +1,8 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http');
 
-var total = 0,
+let total = 0,
     count;
 
 http.createServer((req, res) => {
@@ -13,7 +13,7 @@ http.createServer((req, res) => {
   if(typeof req.headers['cookie'] === 'undefined') {
     count = 1;
   } else {
-    var pair = req.headers['cookie'].split('=');
+    let pair = req.headers['cookie'].split('=');
     count = Number(pair[1]) + 1;
   }
 

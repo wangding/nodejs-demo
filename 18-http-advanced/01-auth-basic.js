@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const server = require('http').createServer(),
       log    = console.log,
@@ -26,11 +26,11 @@ server.on('request', (req, res) => {
 server.listen(8080);
 
 function userNamePasswd(str) {
-  var msg = str.split(' ');
+  let msg = str.split(' ');
   assert.equal(msg.length, 2, 'must to be 2');
   assert.equal(msg[0], 'Basic', 'must to be Basic');
 
-  var account = Buffer.from(msg[1], 'base64');
+  let account = Buffer.from(msg[1], 'base64');
   msg = account.toString('utf8').split(':');
 
   return {
@@ -45,7 +45,7 @@ function sendNormalMsg(res) {
 
 function sendSecretMsg(req, res) {
   if(req.headers.authorization) {
-    var usr = userNamePasswd(req.headers.authorization);
+    let usr = userNamePasswd(req.headers.authorization);
     console.log('\nauth:', usr);
 
     if(usr.userName === 'wangding' && usr.passWord === '123') {

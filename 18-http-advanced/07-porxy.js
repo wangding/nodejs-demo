@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       url  = require('url');
@@ -6,10 +6,10 @@ const http = require('http'),
 http.createServer((req, res) => {
   console.log(req.headers);
 
-  var options = url.parse(req.url);
+  let options = url.parse(req.url);
   options.headers = req.headers;
 
-  var proxyRequest = http.request(options, (proxyResponse) => {
+  let proxyRequest = http.request(options, (proxyResponse) => {
     proxyResponse.on('data', (chunk) => {
       console.log(chunk.toString('utf8'));
       res.write(chunk, 'binary'); 

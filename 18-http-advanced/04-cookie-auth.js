@@ -1,18 +1,18 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       log  = console.log,
       qs   = require('querystring');
 
-var isLogin;
+let isLogin;
 
 http.createServer((req, res) => {
-  var data = '';
+  let data = '';
 
   if(typeof req.headers['cookie'] === 'undefined') {
     isLogin = false;
   } else {
-    var pair = req.headers['cookie'].split('=');
+    let pair = req.headers['cookie'].split('=');
     isLogin = (pair[1] === 'true');
   }
 
@@ -21,7 +21,7 @@ http.createServer((req, res) => {
   if(req.method === 'POST' && req.url === '/login') {
     req.on('data', (chunk) => { data += chunk; });
     req.on('end', () => {
-      var account = qs.parse(data);
+      let account = qs.parse(data);
 
       if(account.user === 'wangding' && account.password === '123') {
         console.log('user: %s, password: %s', account.user, account.password);
@@ -49,7 +49,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function showLogin(res) {
-  var html = '<!DOCTYPE html>'
+  let html = '<!DOCTYPE html>'
             + '<html>'
             + '  <head>'
             + '    <meta charset="UTF-8">'
@@ -72,7 +72,7 @@ function showLogin(res) {
 }
 
 function showHome(res) {
-  var html = '<!DOCTYPE html>'
+  let html = '<!DOCTYPE html>'
             + '<html>'
             + '  <head>'
             + '    <meta charset="UTF-8">'

@@ -1,15 +1,15 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       qs   = require('querystring');
 
-var sessions = {},            // 存放 Session 的字典
+let sessions = {},            // 存放 Session 的字典
     key      = 'SessionID',
     EXPIRES  = 56 * 1000,
     isLogin  = false;
 
 function genSession() {
-  var session = {
+  let session = {
     id: (new Date()).getTime() + Math.random(),
     expire: (new Date()).getTime() + EXPIRES
   };
@@ -22,11 +22,11 @@ function genSession() {
 function getCookie(req) {
   if(typeof req.headers['cookie'] === 'undefined') return null;
   
-  var cookieArray = req.headers['cookie'].split(';'),
+  let cookieArray = req.headers['cookie'].split(';'),
       cookies     = {};
   
   cookieArray.forEach((cookie) => {
-    var pair = cookie.trim().split('=');
+    let pair = cookie.trim().split('=');
     cookies[pair[0]] = pair[1];
   });
 
@@ -34,14 +34,14 @@ function getCookie(req) {
 }
 
 http.createServer((req, res) => {
-  var cookies = getCookie(req);
-  var sessionID = (cookies === null)? null : cookies[key];
+  let cookies = getCookie(req);
+  let sessionID = (cookies === null)? null : cookies[key];
 
   if(!sessionID) {    // Cookie 中没有 SessionID
     req.session = genSession();
     isLogin = false;
   } else {            // Cookie 中有 SessionID
-    var session = sessions[sessionID];
+    let session = sessions[sessionID];
 
     if(session) {     // Cookie 中的 SessionID 在 Session 列表中
       if(session.expire > (new Date()).getTime()) {   // Session 没有过期
@@ -64,12 +64,12 @@ http.createServer((req, res) => {
 
 
 function pageOpt(req, res) {
-  var data = '';
+  let data = '';
 
   if(req.method === 'POST' && req.url === '/login') {
     req.on('data', (chunk) => { data += chunk; });
     req.on('end', () => {
-      var account = qs.parse(data);
+      let account = qs.parse(data);
 
       if(account.user === 'wangding' && account.password === '123') {
         console.log('user: %s, password: %s', account.user, account.password);
@@ -97,7 +97,7 @@ function pageOpt(req, res) {
 }
 
 function showLogin(res) {
-  var html = '<!DOCTYPE html>'
+  let html = '<!DOCTYPE html>'
             + '<html>'
             + '  <head>'
             + '    <meta charset="UTF-8">'
@@ -120,7 +120,7 @@ function showLogin(res) {
 }
 
 function showHome(req, res) {
-  var html = '<!DOCTYPE html>'
+  let html = '<!DOCTYPE html>'
             + '<html>'
             + '  <head>'
             + '    <meta charset="UTF-8">'

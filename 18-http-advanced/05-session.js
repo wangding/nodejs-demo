@@ -1,13 +1,13 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http');
 
-var sessions = {},            // 存放 Session 的字典
+let sessions = {},            // 存放 Session 的字典
     key      = 'SessionID',
     EXPIRES  = 5 * 1000;
 
 function genSession() {
-  var session = {
+  let session = {
     id: (new Date()).getTime() + Math.random(),
     expire: (new Date()).getTime() + EXPIRES
   };
@@ -20,11 +20,11 @@ function genSession() {
 function getCookie(req) {
   if(typeof req.headers['cookie'] === 'undefined') return null;
   
-  var cookieArray = req.headers['cookie'].split(';'),
+  let cookieArray = req.headers['cookie'].split(';'),
       cookies     = {};
   
   cookieArray.forEach((cookie) => {
-    var pair = cookie.trim().split('=');
+    let pair = cookie.trim().split('=');
     cookies[pair[0]] = pair[1];
   });
 
@@ -32,13 +32,13 @@ function getCookie(req) {
 }
 
 http.createServer((req, res) => {
-  var cookies = getCookie(req);
-  var sessionID = (cookies === null)? null : cookies[key];
+  let cookies = getCookie(req);
+  let sessionID = (cookies === null)? null : cookies[key];
 
   if(!sessionID) {    // Cookie 中没有 SessionID
     req.session = genSession();
   } else {            // Cookie 中有 SessionID
-    var session = sessions[sessionID];
+    let session = sessions[sessionID];
 
     if(session) {     // Cookie 中的 SessionID 在 Session 列表中
       if(session.expire > (new Date()).getTime()) {   // Session 没有过期

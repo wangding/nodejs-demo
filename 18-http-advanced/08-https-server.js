@@ -1,9 +1,9 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const https = require('https'),
       fs    = require('fs');
 
-var options = {
+let options = {
   key: fs.readFileSync('./key.pem'),
   cert: fs.readFileSync('./key-cert.pem')
 };
