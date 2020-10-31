@@ -1,6 +1,6 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const user = { 
+const user = {
   name: '王顶',
   age:  41,
   qq:   '408542507'
