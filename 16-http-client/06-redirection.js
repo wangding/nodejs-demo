@@ -1,15 +1,13 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       url  = require('url'),
       log  = console.log;
 
-var addr = process.argv[2] || 'http://www.sian.com/';
+let addr = process.argv[2] || 'http://www.sian.com/';
 
 function opt(addr) {
-  var options = url.parse(addr);
-
-  options.method = 'GET';
+  let options = url.parse(addr);
   options.headers = { 'User-Agent': '05-redirection.js' };
 
   return options;

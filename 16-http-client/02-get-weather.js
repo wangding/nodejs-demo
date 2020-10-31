@@ -1,19 +1,19 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const http = require('http');
+const http = require('https');
 
-var city = process.argv[2] || '石家庄',
-    addr = 'http://v.juhe.cn/weather/index?cityname=' + city + '&key=70b20823f67b5f0ca3358b796fd83260';
+let city = process.argv[2] || '石家庄',
+    addr = 'https://api.66mz8.com/api/weather.php?location=' + city;
 
 http.get(global.encodeURI(addr), (res) => {
-  var result = '';
+  let result = '';
 
   res.on('data', (data) => {
     result += data.toString('utf8');
   });
 
   res.on('end', () => {
-    var weather = JSON.parse(result);
+    let weather = JSON.parse(result);
 
     console.log(weather);
   });

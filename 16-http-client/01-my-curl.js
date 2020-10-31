@@ -1,10 +1,10 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       log  = console.log,
       url  = require('url');
 
-var addr    = process.argv[2] || 'http://sample.wangding.in/web/one-div.html',
+let addr    = process.argv[2] || 'http://sample.wangding.in/web/one-div.html',
     options = url.parse(global.encodeURI(addr));
 
 options.headers = {
