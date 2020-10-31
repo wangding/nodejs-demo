@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const server = require('net').createServer(),
       log    = console.log,
@@ -10,25 +10,26 @@ server.on('connection', (socket) => {
   socket.setEncoding('utf8');
 
   socket.on('data', (data) => {
-    var cmd = data.slice(0, data.length-2);
+    let cmd = data.slice(0, data.length-2);
 
     log(socket.remoteAddress + ':' + socket.remotePort + ' > ' + cmd);
 
     switch(cmd) {
-      case 'ls':
-        var files = fs.readdirSync(__dirname);
+      case 'ls': {
+        let files = fs.readdirSync(__dirname);
         files.forEach(function(f) {
           socket.write(f + '\r\n');
         });
         break;
-
-      case 'quit':
+      }
+      case 'quit': {
         server.close();
         process.exit();
         break;
-
-      default:
+      }
+      default: {
         break;
+      }
     }
   });
 
