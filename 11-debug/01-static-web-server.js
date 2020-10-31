@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       util = require('util'),
@@ -10,7 +10,7 @@ http.createServer((req, res) => {
   log(req.headers);
   log('');
 
-  var file = __dirname + req.url;
+  let file = __dirname + req.url;
   fs.readFile(file, (err, data) => {
     if(err) {
       log(err.message);

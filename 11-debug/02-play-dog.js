@@ -1,8 +1,8 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const Dog = require('./02-dog.js');
+const Dog = require('./02-dog');
 
-var taidi  = new Dog('taidi', 4),
+let taidi  = new Dog('taidi', 4),
     zangao = new Dog('zangao', 8);
 
 taidi.on('bark', onBark);
