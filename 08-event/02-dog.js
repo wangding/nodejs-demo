@@ -1,29 +1,31 @@
-#!/usr/bin/node
-
 const EventEmitter = require('events').EventEmitter;
 
-function Dog(name, energy) {
-  var _name   = name,
-      _energy = energy,
-      that    = this;
+class Dog extends EventEmitter {
+  #name;
+  #energy;
 
-  EventEmitter.call(this);
+  constructor(name, energy) {
+    super();
+    this.#name   = name;
+    this.#energy = energy;
+  }
 
-  var timer = setInterval(() => {
-    if(energy > 0) {
-      that.emit('bark');
-      _energy--;
-    }
-
-    if(_energy < 0) {
-      clearInterval(timer);
+  #timer = setInterval(()=> {
+    if(this.#energy > 0) {
+      this.emit('bark');
+      this.#energy--;
+    } else {
+      clearInterval(this.#timer);
     }
   }, 1000);
 
-  this.name = () => _name;
-  this.energy = () => _energy;
-}
+  get name() {
+    return this.#name;
+  }
 
-Dog.prototype = EventEmitter.prototype;
+  get energy() {
+    return this.#energy;
+  }
+}
 
 module.exports = Dog;

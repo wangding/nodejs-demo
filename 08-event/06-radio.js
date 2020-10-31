@@ -1,34 +1,38 @@
-#!/usr/bin/node
+class Radio {
+  #listeners = {};
+  #station;
 
-var Radio = function(station) {
-  var _listeners = {};
+  constructor(station) {
+    this.#station = station;
+  }
 
-  setTimeout(() => {
-    emit('open', station);
+  #open = setTimeout(() => {
+    this.#emit('open', this.#station);
+    clearTimeout(this.#open);
   }, 0);
 
-  setTimeout(() => {
-    emit('stop', station);
+  #stop = setTimeout(() => {
+    this.#emit('stop', this.#station);
+    clearTimeout(this.#stop);
   }, 5000);
 
-  function emit(evt, arg) {
-    if(typeof(_listeners[evt]) === 'undefined') {
-      console.error('Error: %s not defined!', evt);
-      process.exit(1);
+  #emit = (evt, arg) => {
+    if(typeof(this.#listeners[evt]) === 'undefined') {
+      throw(new Error(`Error: ${evt} not defined!`));
     }
 
-    _listeners[evt].forEach((fn) => {
+    this.#listeners[evt].forEach((fn) => {
       fn.call(this, arg);
     });
   }
 
-  this.on = (evt, fn) => {
-    if(typeof(_listeners[evt]) === 'undefined') {
-      _listeners[evt] = [];
+  on(evt, fn) {
+    if(typeof(this.#listeners[evt]) === 'undefined') {
+      this.#listeners[evt] = [];
     }
 
-    _listeners[evt].push(fn);
-  };
-};
+    this.#listeners[evt].push(fn);
+  }
+}
 
 module.exports = Radio;

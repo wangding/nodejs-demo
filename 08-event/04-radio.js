@@ -1,11 +1,9 @@
-#!/usr/bin/node
-
 const EventEmitter = require('events').EventEmitter;
 
 function Radio(station) {
-  var that = this;
-  
-  for(var m in EventEmitter.prototype) {
+  let that = this;
+
+  for(let m in EventEmitter.prototype) {
     this[m] = EventEmitter.prototype[m];
   }
 

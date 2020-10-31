@@ -1,12 +1,10 @@
-#!/usr/bin/node
-
 const EventEmitter = require('events').EventEmitter,
       util         = require('util');
 
 function Radio(station) {
   EventEmitter.call(this);
 
-  var self = this;
+  let self = this;
 
   setTimeout(() => {
     self.emit('open', station);
