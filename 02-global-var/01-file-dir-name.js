@@ -1,9 +1,11 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-console.log('file name:', __filename);
-console.log('dir name:', __dirname);
+const log = console.log;
 
-var fileName = __dirname + '/views/view.html';  // 方案 1：不好，没有考虑跨平台
+log(`file name: ${__filename}`);
+log(`dir name:  ${__dirname}`);
+
+let fileName = __dirname + '/views/view.html';  // 方案 1：不好，没有考虑跨平台
 
 // 方案 2：不好，代码复杂，平台考虑不全面
 switch(process.platform) {
@@ -19,9 +21,10 @@ switch(process.platform) {
     fileName = 'something wrong';
 }
 
-console.log('fileName:', fileName);
+log(`fileName: ${fileName}`);
 
 // 方案 3：最佳
 const path = require('path');
+
 fileName = path.join(__dirname, 'views', 'login.html');
-console.log('fileName:', fileName);
+log('fileName:', fileName);
