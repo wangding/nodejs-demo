@@ -1,10 +1,10 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http');
 
 http.createServer((req, res) =>{
-  var html = '<!DOCTYPE html><html><head><title>Hello</title><head><body><h1>Hello world!</h1></body></html>';
-  
+  const html = '<!DOCTYPE html><html><head><title>Hello</title><head><body><h1>Hello world!</h1></body></html>';
+
   if(req.url === '/') {
     res.writeHead(200, {
       'Content-Type': 'text/html',

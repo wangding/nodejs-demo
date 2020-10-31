@@ -1,13 +1,13 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       fs   = require('fs'),
       log  = console.log,
       qs   = require('querystring');
 
-var items = [];
+let items = [];
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   if(req.url != '/') { return err(res); }
 
   log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
@@ -30,7 +30,7 @@ http.createServer(function(req, res) {
 }).listen(8080);
 
 function err(res) {
-  var msg = 'Not found';
+  let msg = 'Not found';
   res.writeHead(404, {
     'Content-Length': msg.length,
     'Content-Type': 'text/plain'
@@ -39,8 +39,8 @@ function err(res) {
 }
 
 function show(res) {
-  var html = fs.readFileSync('./11-template.html').toString('utf8'),
-      items_html = items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n');
+  let html = fs.readFileSync('./11-template.html').toString('utf8'),
+      items_html = items.map(item => '<li>' + item + '</li>').join('\n');
 
   html = html.replace('%', items_html); 
   res.writeHead(200, {
@@ -53,11 +53,11 @@ function show(res) {
 }
 
 function add(req, res) {
-  var body = '';
+  let body = '';
 
-  req.on('data', function(chunk) { body += chunk; });
-  req.on('end', function() {
-    var item = qs.parse(body).item;
+  req.on('data', chunk => body += chunk);
+  req.on('end', () => {
+    let item = qs.parse(body).item;
     if(item !== '') {  items.push(item);  }
 
     show(res);

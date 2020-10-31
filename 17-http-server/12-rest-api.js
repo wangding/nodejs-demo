@@ -1,9 +1,9 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       fs   = require('fs');
 
-var items = [];
+let items = [];
 
 http.createServer((req, res) => {
   printRequest(req);
@@ -17,7 +17,7 @@ http.createServer((req, res) => {
     sendFile(res);
     return;
   }
-  
+
   if(req.url !== '/todo' && !/^\/todo:(\d)+$/.test(req.url)) {
     showErrPage(res);
     return;
@@ -46,7 +46,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function showHomePage(res) {
-  var html = fs.readFileSync('./12-todo.html').toString('utf8');
+  let html = fs.readFileSync('./12-todo.html').toString('utf8');
 
   res.writeHead(200, {
     'Content-Type': 'text/html',
@@ -59,7 +59,7 @@ function showHomePage(res) {
 }
 
 function showErrPage(res) {
-  var html = fs.readFileSync('./12-404.html').toString('utf8');
+  let html = fs.readFileSync('./12-404.html').toString('utf8');
 
   res.writeHead(404, {
     'Content-Type': 'text/html',
@@ -71,7 +71,7 @@ function showErrPage(res) {
 }
 
 function sendFile(res) {
-  var data = fs.readFileSync('./12-todo.js').toString('utf8');
+  let data = fs.readFileSync('./12-todo.js').toString('utf8');
 
   res.writeHead(200, {
     'Content-Type': 'application/javascript',
@@ -83,14 +83,17 @@ function sendFile(res) {
 }
 
 function printRequest(req) {
-  console.log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  console.log(req.headers);
-  console.log('');
+  const log = console.log;
+
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log('');
+  log(items);
 }
 
 // method: GET, url: /todo, fun: get all todo items
 function select(res) {
-  var body = JSON.stringify(items);
+  let body = JSON.stringify(items);
 
   res.writeHead(200, {
     'Content-Length': Buffer.byteLength(body),
@@ -102,10 +105,10 @@ function select(res) {
 
 // method: POST, url: /todo, fun: insert todo item
 function insert(req, res) {
-  var item = '';
+  let item = '';
 
-  req.on('data', function(data) { item += data; });
-  req.on('end', function() {
+  req.on('data', data => item += data);
+  req.on('end', () => {
     items.push(item);
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -122,7 +125,7 @@ function del(req, res) {
     return;
   }
 
-  var arg = req.url.split(':'),
+  let arg = req.url.split(':'),
       id  = parseInt(arg[1]);
 
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -139,12 +142,12 @@ function del(req, res) {
 
 // method: PUT, url: /todo:id, fun: update todo item by id
 function update(req, res) {
-  var arg = req.url.split(':'),
+  let arg = req.url.split(':'),
       id  = parseInt(arg[1]),
       item = '';
 
   res.setHeader('Access-Control-Allow-Origin', '*');
-  req.on('data', (chunk) => { item += chunk; });
+  req.on('data', chunk => item += chunk);
   req.on('end', () => {
     if(!items[id]) {
       res.statusCode = 404;

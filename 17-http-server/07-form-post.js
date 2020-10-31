@@ -1,10 +1,10 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       log  = console.log,
       qs   = require('querystring');
 
-var items = [];
+let items = [];
 
 http.createServer((req, res) => {
   if(req.url != '/') {
@@ -32,23 +32,24 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function show(res) {
-  var html = '<!DOCTYPE html>\n'
-            + '<html>\n'
-            + '  <head>\n'
-            + '    <meta charset="UTF-8">\n'
-            + '    <title>Todo list</title>\n'
-            + '  </head>\n'
-            + '  <body>\n'
-            + '    <h1>Todo List</h1>\n'
-            + '    <form method="post" action="/">\n'
-            + '       <p><input type="text" name="item" />'
-            + '       <input type="submit" value="Add Item" /></p>\n'
-            + '    </form>\n'
-            + '    <ul>\n'
-            + items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n')
-            + '    </ul>\n'
-            + '  </body>\n'
-            + '</html>';
+  let html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Todo list</title>
+      </head>
+      <body>
+        <h1>Todo List</h1>
+        <form method="post" action="/">
+          <p><input type="text" name="item" />
+          <input type="submit" value="Add Item" /></p>
+        </form>
+        <ul>
+          ${items.map(item => '<li>' + item + '</li>').join('')}
+        </ul>
+      </body>
+    </html>`;
 
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Content-Length', Buffer.byteLength(html));
@@ -58,22 +59,21 @@ function show(res) {
 }
 
 function add(req, res) {
-  var body = '';
+  let body = '';
 
-  req.on('data', function(chunk) { body += chunk; });
-  req.on('end', function() {
+  req.on('data', chunk => body += chunk);
+  req.on('end', () => {
     log(body);
-    
-    if(body != '') {
-      items.push(qs.parse(body).item);
-    }
+
+    let item = qs.parse(body).item;
+    if(item !== '') items.push(item);
 
     show(res);
   });
 }
 
 function err(res) {
-  var msg = 'Not found!';
+  const msg = 'Not found!';
 
   res.statusCode = 404;
   res.setHeader('Content-Length', msg.length);

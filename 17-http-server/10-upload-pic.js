@@ -1,10 +1,23 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       fs   = require('fs'),
       qs   = require('querystring'),
       path = require('path'),
       log  = console.log;
+
+const errorPage = `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Error</title>
+    </head>
+    <body>
+      <h1>Sorry! There is  nothing!</h1>
+      <a href="/">back to upload file</a>
+    </body>
+  </html>`;
 
 http.createServer((req, res) => {
   printRequest(req);
@@ -13,18 +26,18 @@ http.createServer((req, res) => {
     show(res, uploadPage());
     return;
   }
-  
+
   if(req.method === 'GET' && req.url.split('/')[1] === 'images') { // 请求图片
     sendPic(req, res);
     return;
-  } 
+  }
 
   if(req.method === 'POST' && req.url ==='/upload') { // 上传图片
     req.setEncoding('binary');
-    var file;
+    let file;
 
-    req.on('data', (data)=>{ file += data; });
-    req.on('end', ()=>{
+    req.on('data', (data) => file += data);
+    req.on('end', () => {
       if(writePic(file)) {
         show(res, uploadPage());
       } else {
@@ -33,13 +46,13 @@ http.createServer((req, res) => {
     });
 
     return;
-  } 
-  
+  }
+
   show(res, errorPage); // 其他请求
 }).listen(8080);
 
 function sendPic(req, res) {
-  var info = req.url.split('/'),
+  let info = req.url.split('/'),
       pic  = path.join(__dirname, req.url),
       ext = info[2].split('.')[1];
 
@@ -61,8 +74,8 @@ function printRequest(req) {
 }
 
 function writePic(file) {
-  var data = file.split('\r\n');
-  var fileName = qs.parse(data[1].split(';')[2].trim())['filename'],
+  let data = file.split('\r\n');
+  let fileName = qs.parse(data[1].split(';')[2].trim())['filename'],
       start = data[0].length + data[1].length + data[2].length + data[3].length + 8,
       end   = file.indexOf('------WebKitFormBoundary', start),
       buf   = file.slice(start, end);
@@ -73,7 +86,7 @@ function writePic(file) {
 
   fileName = path.join(__dirname, 'images', fileName);
   fs.writeFileSync(fileName, buf, {'encoding': 'binary'});
-  
+
   return true;
 }
 
@@ -86,37 +99,24 @@ function show(res, page) {
 }
 
 function uploadPage() {
-  var images = fs.readdirSync('./images');
+  let images = fs.readdirSync('./images');
 
-  return ''
-      + '<!DOCTYPE html>'
-      + '<html>'
-        + '<head>'
-          + '<meta charset="UTF-8">'
-          + '<title>Upload Picture</title>'
-        + '</head>'
-        + '<body>'
-          + '<h1>Upload Picture</h1>'
-          + '<form method="post" enctype="multipart/form-data" action="/upload">'
-            + '<input type="file" name="upload" accept=".png, .jpg, .jpeg, .gif, .bmp">'
-            + '<input type="submit" value="Upload">'
-          + '</form>'
-          + '<div id="album">'
-            + images.map(function(pic) { return '<img src="/images/' + pic +'">'; }).join('\n')
-          + '</div>'
-        + '</body>'
-      + '</html>';
+  return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Upload Picture</title>
+      </head>
+      <body>
+        <h1>Upload Picture</h1>
+        <form method="post" enctype="multipart/form-data" action="/upload">
+          <input type="file" name="upload" accept=".png, .jpg, .jpeg, .gif, .bmp">
+          <input type="submit" value="Upload">
+        </form>
+        <div id="album">
+          ${images.map(pic => '<img src="/images/' + pic + '">').join('\n')}
+        </div>
+      </body>
+    </html>`;
 }
-
-var errorPage = ''
-    + '<!DOCTYPE html>'
-    + '<html>'
-      + '<head>'
-        + '<meta charset="UTF-8">'
-        + '<title>Error</title>'
-      + '</head>'
-      + '<body>'
-        + '<h1>Sorry! There is  nothing!</h1>'
-        + '<a href="/">back to upload file</a>'
-      + '</body>'
-    + '</html>';

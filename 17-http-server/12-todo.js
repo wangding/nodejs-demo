@@ -1,16 +1,17 @@
-/* global fetch: true */
-$(function(){
-  var $todo      = $('#todo'),
+* global fetch: true */
+$(() => {
+  let $todo      = $('#todo'),
       $btnAdd    = $('#btnAdd'),
       $btnDelAll = $('#btnDelAll'),
       $out       = $('#output');
 
-  var items = [];
+  let items = [];
+  let baseURL = location.origin;
 
   getItems();
 
   function onEdtClick(e) {
-    var $li  = $(e.target.parentNode),
+    let $li  = $(e.target.parentNode),
         src  = $li.text(),
         id   = items.indexOf(src),
         $DOM = $('<div><input class="todo-edit" type="text"><input class="btn-save" type="button" value="save"><div>'),
@@ -18,8 +19,8 @@ $(function(){
         $sav = $DOM.find('.btn-save');
 
     $edt.val(src);
-    $sav.click(function() {
-      var dst = $edt.val();
+    $sav.click(() => {
+      let dst = $edt.val();
       if(dst === '') return;
 
       $li.html('');
@@ -28,7 +29,7 @@ $(function(){
       $li.find('.iconlajitong').click(onDelClick);
       $li.find('.iconbianji').click(onEdtClick);
 
-      fetch('http://192.168.133.144:8080/todo:' + id, {method: 'PUT', body: dst});
+      fetch(baseURL + '/todo:' + id, {method: 'PUT', body: dst});
       items[id] = dst;
     });
 
@@ -39,32 +40,34 @@ $(function(){
   }
 
   function onDelClick(e) {
-    var id = items.indexOf(e.target.parentNode.textContent);
-    fetch('http://192.168.133.144:8080/todo:' + id, {method: 'DELETE'});
+    let id = items.indexOf(e.target.parentNode.textContent);
+
+    fetch(baseURL + '/todo:' + id, {method: 'DELETE'});
     items.splice(id, 1);
 
     showData();
   }
 
-  $btnAdd.click(function(){
+  $btnAdd.click(() => {
     if($todo.val() === '') return;
-    fetch('http://192.168.133.144:8080/todo', {method: 'POST', body: $todo.val()});
+
+    fetch(baseURL + '/todo', {method: 'POST', body: $todo.val()});
     items.push($todo.val());
 
     $todo.val('');
     showData();
   });
 
-  $btnDelAll.click(function() {
+  $btnDelAll.click(() => {
     $out.html('');
 
     items = [];
-    fetch('http://192.168.133.144:8080/todo', {method: 'DELETE'});
+    fetch(baseURL + '/todo', {method: 'DELETE'});
   });
 
   function getItems() {
-    fetch('http://192.168.133.144:8080/todo').then(function(res) {
-      res.text().then(function(txt) {
+    fetch(baseURL + '/todo').then(res => {
+      res.text().then(txt => {
         items = JSON.parse(txt);
         showData();
       });
@@ -74,8 +77,8 @@ $(function(){
   function showData() {
     $out.html('');
 
-    var $ul  = $('<ul></ul>');
-    $ul.html(items.map(function(item) { return '<li>' + item + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>'; }).join('\n'));
+    let $ul  = $('<ul></ul>');
+    $ul.html(items.map(item => '<li>' + item + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>').join('\n'));
     $out.append($ul);
     $out.find('.iconlajitong').click(onDelClick);
     $out.find('.iconbianji').click(onEdtClick);

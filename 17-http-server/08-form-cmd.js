@@ -1,11 +1,11 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-var http = require('http'),
+let http = require('http'),
     cp   = require('child_process'),
     qs   = require('querystring'),
     result = '';
 
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
   if(req.url != '/') {
     err(res);
     return;
@@ -30,7 +30,7 @@ http.createServer(function(req, res) {
 }).listen(8080);
 
 function err(res) {
-  var msg = 'Not found';
+  const msg = 'Not found';
 
   res.statusCode = 404;
   res.setHeader('Content-Length', msg.length);
@@ -40,23 +40,23 @@ function err(res) {
 }
 
 function show(res) {
-  var html = '<!DOCTYPE html>\n' +
-             '<html>\n' +
-             '  <head>\n' +
-             '    <meta charset="UTF-8">\n' +
-             '    <title>execute linux command</title>\n' +
-             '  </head>\n' +
-             '  <body>\n' +
-             '    <h1>Input a Linux Command</h1>\n' +
-             '    <form method="post" action="/">\n' +
-             '       <p><input type="text" name="cmd" />\n' +
-             '       <input type="submit" value="execute" /></p>\n' +
-             '    </form>\n' +
-             '    <div>\n' + result +
-             '    </div>\n' +
-             '  </body>\n' +
-             '</html>';
-  
+  let html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>execute linux command</title>
+      </head>
+      <body>
+        <h1>Input a Linux Command</h1>
+        <form method="post" action="/">
+            <p><input type="text" name="cmd" />
+            <input type="submit" value="execute" /></p>
+        </form>
+        <div><pre style="font-family: Consolas;">${result}</pre></div>
+      </body>
+    </html>`;
+
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Content-Length', Buffer.byteLength(html));
@@ -65,18 +65,19 @@ function show(res) {
 }
 
 function execCmd(req, res) {
-  var cmd = '';
+  let cmd = '';
 
-  req.on('data', function(chunk) { cmd += chunk; });
-  req.on('end', function() {
+  req.on('data', chunk => cmd += chunk);
+  req.on('end', () => {
     cmd = qs.parse(cmd).cmd;
 
     if(cmd === '') {
       result = 'Please input linux command';
       show(res);
     } else {
-      cp.exec(cmd, function(err, stdout, stderr) {
-        result = (err === null) ? stdout.replace(/\n/g, '<br/>') : stderr;
+      console.log(cmd);
+      cp.exec(cmd, (err, stdout, stderr) => {
+        result = (err === null) ? stdout : stderr;
         show(res);
       });
     }

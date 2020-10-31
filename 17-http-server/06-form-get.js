@@ -1,14 +1,14 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       url  = require('url'),
       qs   = require('querystring'),
       log  = console.log;
 
-var items = [];
+let items = [];
 
 http.createServer((req, res) => {
-  var path = url.parse(req.url).pathname;
+  let path = url.parse(req.url).pathname;
 
   if(path != '/') {
     err(res);
@@ -23,23 +23,24 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function show(res) {
-  var html = '<!DOCTYPE html>\n'
-            + '<html>\n'
-            + '  <head>\n'
-            + '    <meta charset="UTF-8">\n'
-            + '    <title>Todo list</title>\n'
-            + '  </head>\n'
-            + '  <body>\n'
-            + '    <h1>Todo List</h1>\n'
-            + '    <form method="get" action="/">\n'
-            + '       <p><input type="text" name="item" />'
-            + '       <input type="submit" value="Add Item" /></p>\n'
-            + '    </form>\n'
-            + '    <ul>\n'
-            + items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n')
-            + '    </ul>\n'
-            + '  </body>\n'
-            + '</html>';
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Todo list</title>
+    </head>
+    <body>
+      <h1>Todo List</h1>
+      <form method="get" action="/">
+        <p><input type="text" name="item" />
+        <input type="submit" value="Add Item" /></p>
+      </form>
+      <ul>
+        ${items.map(item => '<li>' + item + '</li>').join('\n')}
+      </ul>
+    </body>
+    </html>`;
 
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Content-Length', Buffer.byteLength(html));
@@ -49,16 +50,16 @@ function show(res) {
 }
 
 function add(req, res) {
-  var value = qs.parse(url.parse(req.url).query).item;
+  const value = qs.parse(url.parse(req.url).query).item;
 
-  if(typeof value !== 'undefined') items.push(value);
+  if(typeof value !== 'undefined' && value !== '') items.push(value);
 
   log(items);
   show(res);
 }
 
 function err(res) {
-  var msg = 'Not found!';
+  const msg = 'Not found!';
 
   res.statusCode = 404;
   res.setHeader('Content-Length', msg.length);

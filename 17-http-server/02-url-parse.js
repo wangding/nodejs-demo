@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       url  = require('url'),
@@ -15,7 +15,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function parseURL(strURL) {
-  var path = url.parse(strURL);
+  const path = url.parse(strURL);
 
   log('href:', path.href);
   log('protocol:', path.protocol);
