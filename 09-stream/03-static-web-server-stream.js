@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       log  = console.log,
@@ -9,7 +9,7 @@ http.createServer((req, res) => {
   log(req.headers);
   log('');
 
-  var file = __dirname + req.url;
+  let file = __dirname + req.url;
 
   // 错误处理方式一：主动防御
   if(fs.existsSync(file)) {
@@ -20,7 +20,7 @@ http.createServer((req, res) => {
   }
 
   /* 错误处理方式二：error 事件捕获
-  var s = fs.createReadStream(file);
+  let s = fs.createReadStream(file);
   s.on('error', (err) => {
     console.log(err.message);
     res.statusCode = 404;

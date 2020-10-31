@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const stdin  = process.stdin,
       stdout = process.stdout,
@@ -6,7 +6,7 @@ const stdin  = process.stdin,
 
 stdin.setEncoding('utf8');
 
-var tf = new Trans();
+let tf = new Trans();
 
 tf._transform = function(chunk, encoding, callback) {
   this.push(Buffer(chunk.toString('utf8').toUpperCase()));

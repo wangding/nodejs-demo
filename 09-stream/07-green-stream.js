@@ -1,16 +1,17 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const Writable = require('stream').Writable;
+const Writable = require('stream').Writable,
+      chalk = require('chalk');
 
-function GreenStream() {
-  Writable.call(this);
+class GreenStream extends Writable {
+  constructor() {
+    super();
+  }
+
+  _write(chunk, encoding, callback) {
+    process.stdout.write(chalk.green(chunk));
+    callback();
+  }
 }
-
-GreenStream.prototype = Writable.prototype;
-
-GreenStream.prototype._write = (chunk, encoding, callback) => {
-  process.stdout.write('\033[1;32m' + chunk + '\033[1;37m');
-  callback();
-};
 
 process.stdin.pipe(new GreenStream());

@@ -1,8 +1,8 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const Readable = require('stream').Readable;
 
-var rs = new Readable(),
+let rs = new Readable(),
     c  = 'a'.charCodeAt(0);
 
 rs._read = () => {

@@ -1,21 +1,23 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const stdin  = process.stdin,
       stdout = process.stdout,
-      Trans  = require('stream').Transform;
+      Trans  = require('stream').Transform,
+      chalk       = require('chalk');
 
 stdin.setEncoding('utf8');
 
-function MyTransform() {
-  Trans.call(this);
+class MyTransform extends Trans {
+  constructor() {
+    super();
+  }
+
+  _transform(chunk, encoding, callback) {
+    this.push(chalk.greenBright(chunk.toString('utf8')));
+    callback();
+  }
 }
 
-MyTransform.prototype = Trans.prototype;
-MyTransform.prototype._transform = function(chunk, encoding, callback) {
-  this.push('\033[1;32m' + chunk.toString('utf8') + '\033[1;37m');
-  callback();
-};
-
-var tf = new MyTransform();
+let tf = new MyTransform();
 
 stdin.pipe(tf).pipe(stdout);
