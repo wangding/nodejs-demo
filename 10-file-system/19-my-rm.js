@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs   = require('fs'),
       join = require('path').join,
@@ -19,10 +19,10 @@ if(fs.statSync(src).isFile())  fs.unlinkSync(src);
 if(fs.statSync(src).isDirectory()) deleteDir(src);
 
 function deleteDir(folder) {
-  var files = fs.readdirSync(folder);
+  let files = fs.readdirSync(folder);
 
-  for(var i=0; i<files.length; i++) {
-    var file = join(folder, files[i]);
+  for(let i=0; i<files.length; i++) {
+    let file = join(folder, files[i]);
 
     if(fs.statSync(file).isFile()) {
       fs.unlinkSync(file);
@@ -33,4 +33,4 @@ function deleteDir(folder) {
   }
 
   fs.rmdirSync(folder);
-} 
+}

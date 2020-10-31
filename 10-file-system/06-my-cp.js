@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs  = require('fs'),
       err = console.error,
@@ -21,7 +21,7 @@ if(typeof dst === 'undefined') {
 }
 
 // 复制文件内容
-var stm = fs.createReadStream(src).pipe(fs.createWriteStream(dst));
+let stm = fs.createReadStream(src).pipe(fs.createWriteStream(dst));
 
 // 复制文件权限
 stm.on('close', () => {

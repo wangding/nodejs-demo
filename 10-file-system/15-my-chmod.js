@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs  = require('fs'),
       err = console.error,
@@ -11,7 +11,7 @@ if(process.argv.length != 4) {
 }
 
 try{
-  fs.chmodSync(src, parseInt(mod, 8));
+  fs.chmodSync(src, mod);
 } catch(e) {
   err(e.message);
   process.exit(2);

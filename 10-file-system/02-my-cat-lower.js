@@ -1,11 +1,11 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs   = require('fs'),
       file = process.argv[2] || __filename;
 
 try {
-  var len = fs.statSync(file).size,
-      buf = new Buffer(len),
+  let len = fs.statSync(file).size,
+      buf = Buffer.alloc(len),
       fid = fs.openSync(file, 'r');
 
   fs.readSync(fid, buf, 0, len, 0);
