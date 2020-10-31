@@ -1,13 +1,23 @@
-#!/usr/bin/node
-
 const pi = Math.PI;
 
-function Circle(radius) {
-  var _r = radius;
+class Circle {
+  #r;
 
-  this.diameter = () => 2 * _r;
-  this.circumference = () => pi * 2 * _r;
-  this.area = () => pi * _r * _r;
+  constructor(radius) {
+    this.#r = radius;
+  }
+
+  diameter() {
+    return 2 * this.#r;
+  }
+
+  circumference() {
+    return pi * 2 * this.#r;
+  }
+
+  area() {
+    return pi * this.#r * this.#r;
+  }
 }
 
 module.exports = Circle;

@@ -1,14 +1,14 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const circle = require('./06-export-object.js'),
       chalk = require('chalk'),
       log   = console.log,
-      info  = chalk.greenBright;
+      red   = chalk.redBright;
 
-log(info('-----------------------------------'));
-log(info(`area:         \t${circle.area(20)}`));
-log(info(`diameter:     \t${circle.diameter(20)}`));
-log(info(`circumference:\t${circle.circumference(20)}`));
-log(info('-----------------------------------'));
+log(red('-----------------------------------'));
+log(red(`area:         \t${circle.area(20)}`));
+log(red(`diameter:     \t${circle.diameter(20)}`));
+log(red(`circumference:\t${circle.circumference(20)}`));
+log(red('-----------------------------------'));
 
 log(module);

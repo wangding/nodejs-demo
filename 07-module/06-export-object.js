@@ -1,5 +1,3 @@
-#!/usr/bin/node
-
 const pi = Math.PI;
 
 module.exports.diameter = (radius) => 2 * radius;

@@ -1,8 +1,11 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const circle = require('./08-circle'),
+/*
+ * 在当前目录运行命令：cp -r 08-circle ../node_modules/circle
+ */
+const circle = require('circle'),
       log    = console.log;
 
-log('area:          \t', circle.area(20));
-log('diameter:      \t', circle.diameter(20));
-log('circumference: \t', circle.circumference(20));
+log('area:          ', circle.area(20));
+log('diameter:      ', circle.diameter(20));
+log('circumference: ', circle.circumference(20));

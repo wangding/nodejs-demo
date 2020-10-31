@@ -1,6 +1,6 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-const Num = require('./07-share.js'),
+const Num = require('./07-share'),
       log = console.log;
 
 var n1 = new Num();
