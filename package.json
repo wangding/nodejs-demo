@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js demo code",
   "scripts": {
-    "test": "eslint --quiet *"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,13 @@
   },
   "homepage": "https://github.com/wangding/nodejs-demo#readme",
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "express": "^4.16.4"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
     "mysql": "^2.18.1"
   }
 }
