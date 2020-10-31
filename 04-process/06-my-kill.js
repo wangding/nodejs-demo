@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const sig = process.argv[2],
       pid = process.argv[3],

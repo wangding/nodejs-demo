@@ -1,11 +1,11 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const log   = console.log,
       stdin = process.stdin,
       stdout= process.stdout,
       msg   = ['Name', 'Email', 'QQ', 'Mobile'];
 
-var me = {}, i = 1;
+let me = {}, i = 1;
 
 stdout.write(msg[0] + ': ');
 
