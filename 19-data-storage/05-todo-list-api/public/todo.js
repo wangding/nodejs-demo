@@ -1,10 +1,10 @@
 /* global fetch: true */
 $(function(){
-  var $todo  = $('#todo'),
+  let $todo  = $('#todo'),
       $btnOk = $('#okButton'),
       $out   = $('#output');
 
-  var items = [];
+  let items = [];
 
   getItems();
 
@@ -32,7 +32,7 @@ $(function(){
   function showData() {
     $out.html('');
 
-    var $ul  = $('<ul></ul>');
+    let $ul  = $('<ul></ul>');
     $ul.html(items.map(function(item) { return '<li>' + item + '</li>'; }).join('\n'));
     $out.append($ul);
   }

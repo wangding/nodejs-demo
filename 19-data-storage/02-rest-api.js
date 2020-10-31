@@ -1,6 +1,6 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
-var http = require('http'),
+let http = require('http'),
     fs = require('fs'),
     items = loadData();
 
@@ -31,7 +31,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function get(res) {
-  var body = JSON.stringify(items);
+  let body = JSON.stringify(items);
 
   res.setHeader('Content-Length', Buffer.byteLength(body));
   res.setHeader('Content-Type', 'text/plain; charset="utf-8"');
@@ -40,7 +40,7 @@ function get(res) {
 }
 
 function insert(req, res) {
-  var item = '';
+  let item = '';
 
   req.on('data', (data) => { item += data; });
   req.on('end', () => {
@@ -51,12 +51,12 @@ function insert(req, res) {
 }
 
 function del(req, res) {
-  var arg = req.url.split('/');
+  let arg = req.url.split('/');
   if(arg[1] === '') {
     items = [];
   }
 
-  var i = parseInt(arg[1]);
+  let i = parseInt(arg[1]);
 
   res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -70,16 +70,16 @@ function del(req, res) {
 }
 
 function change(req, res) {
-  var arg = req.url.split('/');
+  let arg = req.url.split('/');
   if(arg[1] === '') {
     items = [];
   }
 
-  var item = '';
+  let item = '';
   res.setHeader('Access-Control-Allow-Origin', '*');
   req.on('data', (chunk) => { item += chunk; });
   req.on('end', () => {
-    var i = parseInt(arg[1]);
+    let i = parseInt(arg[1]);
 
     if(!items[i]) {
       res.statusCode = 404;
@@ -93,7 +93,7 @@ function change(req, res) {
 
 function loadData() {
   try {
-    var data = fs.readFileSync('./data.txt', 'utf8');
+    let data = fs.readFileSync('./data.txt', 'utf8');
     console.log(data);
     return JSON.parse(data);
   } catch(e) { return []; }

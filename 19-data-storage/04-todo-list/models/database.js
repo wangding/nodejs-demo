@@ -1,6 +1,6 @@
-var mysql = require('mysql');
-var config = require('./config.json');
+let mysql = require('mysql');
+let config = require('./config.json');
 
-var pool = mysql.createPool(config);
+let pool = mysql.createPool(config);
 
 module.exports = pool;

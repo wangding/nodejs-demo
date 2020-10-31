@@ -1,6 +1,6 @@
 const TodoList = require('../models/todo-list.js');
 
-var todo = new TodoList();
+let todo = new TodoList();
 
 todo.addItem('吃饭', function(err, results){
   console.log(err, results);

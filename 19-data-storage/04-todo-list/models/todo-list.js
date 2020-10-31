@@ -1,17 +1,17 @@
 const db = require('./database');
 
-var TodoList = function() {};
+let TodoList = function() {};
 
 TodoList.prototype.getAll = function(callback) {
   const sql = 'SELECT * FROM todo';
-  var items = [];
+  let items = [];
 
   db.query(sql, function(err, results) {
     if (err) {
       callback(true);
       return;
     }
-    
+
     results.forEach((e) => { items.push(e.item); });
 
     callback(false, items);

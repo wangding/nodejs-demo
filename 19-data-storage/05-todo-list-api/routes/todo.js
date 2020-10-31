@@ -1,8 +1,8 @@
 const TodoList = require('../models/todo-list');
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var todo = new TodoList();
+let todo = new TodoList();
 
 router.get('/', function(req, res) {
   res.header('Access-Control-Allow-Origin', '*');

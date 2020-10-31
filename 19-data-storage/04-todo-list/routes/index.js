@@ -1,8 +1,8 @@
 const TodoList = require('../models/todo-list.js');
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var todo = new TodoList();
+let todo = new TodoList();
 
 router.get('/', function(req, res/*, next*/) {
   todo.getAll((err, items) => {
@@ -31,4 +31,3 @@ router.post('/', function(req, res){
 });
 
 module.exports = router;
-

@@ -1,16 +1,16 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       fs   = require('fs');
 
-var buf = {};
+let buf = {};
 
 http.createServer((req, res) => {
   sendFile(req, res);
 }).listen(8080);
 
 function sendFile(req, res) {
-  var file = __dirname + req.url;
+  let file = __dirname + req.url;
 
   if(!buf[file]) {
     if(!fs.existsSync(file)) {
