@@ -1,17 +1,18 @@
 #!/usr/bin/node
 
-var http = require('http'),
-    zlib = require('zlib'),
-    url = require('url');
+const http = require('http'),
+      zlib = require('zlib'),
+      chalk= require('chalk'),
+      url = require('url');
 
 http.createServer((req, res) => {
   greenMsg('[REQUEST HEADER]');
   console.log(req.headers);
 
-  var options = url.parse(req.url);
+  let options = url.parse(req.url);
   options.headers = req.headers;
 
-  var proxyRequest = http.request(options, (proxyResponse) => {
+  let proxyRequest = http.request(options, (proxyResponse) => {
     proxyResponse.on('data', (chunk) => {
       greenMsg('[RESPONSE BODY]');
       console.log(zlib.gunzipSync(chunk).toString('utf8'));
@@ -34,4 +35,4 @@ http.createServer((req, res) => {
   });
 }).listen(8080);
 
-function greenMsg(msg) {  console.log('\n\033[1;32m' + msg + '\033[1;37m'); }
+function greenMsg(msg) {  console.log(chalk.greenBright(msg)); }
