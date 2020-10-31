@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const log = console.log,
       usr = process.argv[2],
@@ -11,6 +11,6 @@ if(process.argv.length !== 4) {
 
 log('user name: %s\npassword: %s', usr, pwd);
 
-const buf = new Buffer(usr + ':' + pwd);
+const buf = Buffer.from(usr + ':' + pwd);
 
 log('Base64:', buf.toString('Base64'));

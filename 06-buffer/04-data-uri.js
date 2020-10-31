@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs   = require('fs'),
       http = require('http'),
@@ -17,14 +17,19 @@ try {
   process.exit(2);
 }
 
-var ext  = path.extname(file);
-var uriData = 'data:image/' + ext.slice(1, ext.length) + ';base64,' + data;
+let ext  = path.extname(file);
+let uriData = 'data:image/' + ext.slice(1, ext.length) + ';base64,' + data;
 
 //console.log('data uri:\n%s', uriData);
 
-var html = '<!DOCTYPE html><html><body><img alt="'
-      + path.basename(file, ext) 
-      + '" src="' + uriData + '"></body></html>';
+let html = `
+  <!DOCTYPE html>
+  <html>
+    <head><title>base64 demo</title></head>
+    <body>
+      <img alt="${path.basename(file, ext)}" src="${uriData}">
+    </body>
+  </html>`;
 
 http.createServer((req, res) => {
   console.log(req.headers);

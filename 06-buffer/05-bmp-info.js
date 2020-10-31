@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs   = require('fs'),
       file = process.argv[2],
@@ -9,8 +9,10 @@ if(process.argv.length !== 3) {
   process.exit(1);
 }
 
+let buf;
+
 try {
-  var buf = fs.readFileSync(file);
+  buf = fs.readFileSync(file);
 } catch(e) {
   console.error(e.message);
   process.exit(2);

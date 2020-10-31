@@ -1,14 +1,14 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const fs = require('fs');
 
-const width = 16,
+const width  = 16,
       height = 16;
 
-var pixelByteSize = width * height * 4;
-var totalSize = pixelByteSize + 54;
+let pixelByteSize = width * height * 4;
+let totalSize     = pixelByteSize + 54;
 
-var buf = new Buffer(totalSize);
+let buf = Buffer.alloc(totalSize);
 
 buf.fill(0);
 
@@ -24,7 +24,7 @@ buf.writeInt32LE(width, 0x12);
 buf.writeInt32LE(height, 0x16);
 
 // data
-for(var i=54; i<totalSize; i+=4) {
+for(let i=54; i<totalSize; i+=4) {
   buf.writeUInt32LE(0xff0000ff, i);
 }
 
