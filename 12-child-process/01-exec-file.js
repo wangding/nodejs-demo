@@ -1,9 +1,9 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const cp   = require('child_process'),
       argv = process.argv;
 
-var cmd  = '',  // 命令
+let cmd  = '',  // 命令
     arg  = [];  // 命令的参数
 
 if(argv.length === 2) {

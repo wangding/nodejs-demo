@@ -1,24 +1,30 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const cp = require('child_process');
 
 console.log('I am father process. PID:', process.pid);
 
-var child = cp.fork('./11-ipc-child.js');
+let son = cp.fork('./11-ipc-child.js'),
+    dau = cp.fork('./11-ipc-child.js');
 
-child.on('message', (msg) => {
-  console.log('Child:', msg);
+son.on('message', (data) => {
+  console.log('I have baby:', data);
+});
+
+dau.on('message', (data) => {
+  console.log('I have baby:', data);
 });
 
 setTimeout(() => {
-  child.send('I am father process. PID: ' + process.pid);
+  son.send('good good study');
 }, 2000);
 
 setTimeout(() => {
-  child.send('I will kill you, son! 2 seconds later.');
+  dau.send('day day up');
 }, 4000);
 
 setTimeout(() => {
-  child.kill('SIGINT');
+  son.kill('SIGINT');
+  dau.kill('SIGINT');
   process.exit();
 }, 6000);

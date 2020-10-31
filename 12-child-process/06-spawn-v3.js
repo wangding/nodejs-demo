@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const http = require('http'),
       cp   = require('child_process');
@@ -6,7 +6,7 @@ const http = require('http'),
 console.log('I am father process. PID:', process.pid);
 
 http.createServer((req, res) => {
-  var child = cp.spawn('./03-child.js');
+  let child = cp.spawn('./03-child.js');
 
   child.stdout.pipe(res);
 }).listen(8080);

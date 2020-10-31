@@ -1,9 +1,9 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 console.log('I am child process. PID:', process.pid);
 
 process.on('message', (msg) => {
-  console.log('Father:', msg);
+  console.log('Father say:', msg);
 });
 
-process.send('hello! I am child process. PID: ' + process.pid);
+process.send(process.pid);

@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 console.log('I am father process. PID:', process.pid);
 

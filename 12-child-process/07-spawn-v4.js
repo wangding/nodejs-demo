@@ -1,10 +1,10 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 console.log('PID:', process.pid);
 
 const cp = require('child_process');
 
-var cat  = cp.spawn('cat', ['./data.txt']),
+let cat  = cp.spawn('cat', ['./data.txt']),
     sort = cp.spawn('sort'),
     uniq = cp.spawn('uniq');
 

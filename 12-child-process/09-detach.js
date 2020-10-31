@@ -1,10 +1,10 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const cp = require('child_process');
 
 console.log('I am father process. PID:', process.pid);
 
-var child = cp.spawn('./03-child.js', [], {detached: true, stdio: ['ignore', 1, 2]});
+let child = cp.spawn('./03-child.js', [], {detached: true, stdio: ['ignore', 1, 2]});
 
 child.unref();
 
