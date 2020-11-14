@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 /*
- * 在当前目录运行命令：cp -r 08-circle ../node_modules/circle
+ * cd ./08-circle && npm link
+ * cd .. && npm link circle
  */
 const circle = require('circle'),
       log    = console.log;
