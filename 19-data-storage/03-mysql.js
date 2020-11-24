@@ -1,80 +1,46 @@
 #!/usr/bin/env node
 
-const mysql = require('mysql'),
-      log   = console.log,
-      con   = mysql.createConnection({
-        host: '192.168.133.144',
-        user: 'root',
-        password: 'ddd',
-        database: 'test'
-      });
+const mysql = require('mysql2/promise'),
+      log   = console.table;
 
-function insert() {
-  const sql = 'insert into books(title, status) values(?, ?, ?)',
-        data = ['wangding', 0];
+let db = {};
 
-  con.connect();
-  con.query(sql, data, (err, result) => {
-    log(result);
-    con.end();
+db.insert = async(con, areaName) => {
+  const sql = `insert into areas(area_name) values('${areaName}')`;
+
+  const [res] = await con.query(sql);
+  log(res);
+};
+
+db.update = async(con, id, areaName) => {
+  const sql = `update areas set area_name = '${areaName}' where id = ${id}`;
+
+  const [res] = await con.query(sql);
+  log(res);
+};
+
+db.del = async(con, id) => {
+  const sql = `delete from areas where id = ${id}`;
+
+  const [res] = await con.query(sql);
+  log(res);
+};
+
+db.select = async(con) => {
+  const sql = 'select * from areas order by id';
+
+  const [rows] = await con.query(sql);
+  log(rows);
+};
+
+(async() => {
+  const con   = await mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'dddd',
+    database: 'demo'
   });
-}
 
-function update() {
-  const sql = 'update books set title = ? where book_id = ?',
-        data= ['hello world', 103];
-
-  con.connect();
-  con.query(sql, data, (err, result) => {
-    log(result);
-    con.end();
-  });
-}
-
-function del() {
-  const sql = 'delete from books where status = ?';
-
-  con.connect();
-  con.query(sql, [1], (err, result) => {
-    log(result);
-    con.end();
-  });
-}
-
-function select() {
-  const sql = 'select * from books';
-
-  con.connect();
-  con.query(sql, (err, result) => {
-    log('id\tstatus\ttitle');
-    log('--------------------------------------');
-    result.forEach((row) => {
-      log(`${row.book_id}\t${row.status}\t${row.title}`);
-    });
-    log('--------------------------------------');
-    con.end();
-  });
-}
-
-/* -------------------------------- */
-
-switch(process.argv[2]) {
-  case 'insert':
-    insert();
-    break;
-
-  case 'update':
-    update();
-    break;
-
-  case 'delete':
-    del();
-    break;
-
-  case 'select':
-    select();
-    break;
-
-  default:
-    log('app opt');
-}
+  await db[process.argv[2]](con, process.argv[3], process.argv[4]);
+  await con.end();
+})();
