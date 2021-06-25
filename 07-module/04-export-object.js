@@ -1,21 +1,21 @@
 const pi = Math.PI;
 
 class Circle {
-  #r;
+  #r = 0;
 
   constructor(radius) {
     this.#r = radius;
   }
 
-  diameter() {
+  get diameter() {
     return 2 * this.#r;
   }
 
-  circumference() {
+  get circumference() {
     return pi * 2 * this.#r;
   }
 
-  area() {
+  get area() {
     return pi * this.#r * this.#r;
   }
 }
