@@ -18,4 +18,5 @@ log('qq:', user.qq);          // 输出方式二：逗号间隔，多变量输�
 log('qq: ' + user.qq);        // 输出方式三：拼接字符串输出
 log(`qq: ${user.qq}`);        // 输出方式四：模板字符串输出
 
+console.table(user);
 console.error('Error! something wrong!');
