@@ -1,13 +1,9 @@
 #!/usr/bin/env node
 
 /* this code need node v12+ */
-
 const log = console.log;
 
 class Bomb {
-  #id;
-  #timerID;
-
   constructor(id) {
     this.#id = id;
   }
@@ -23,6 +19,9 @@ class Bomb {
     clearTimeout(this.#timerID);
     log(`#${this.#id} is safe!`);
   }
+
+  #id;
+  #timerID;
 }
 
 let b1 = new Bomb(1);
