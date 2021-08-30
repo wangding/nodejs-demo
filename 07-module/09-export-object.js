@@ -20,6 +20,4 @@ class Circle {
   #r = 0;
 }
 
-module.exports = Circle;
-
-console.log(module);
+export default Circle;

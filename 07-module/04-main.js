@@ -5,7 +5,7 @@ const Circle = require('./04-export-object.js'),
       log   = console.log,
       red   = chalk.redBright;
 
-var c = new Circle(20);
+const c = new Circle(20);
 
 log(red('-----------------------------------'));
 log(red(`area:           ${c.area}`));

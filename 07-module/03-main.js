@@ -5,7 +5,7 @@ const circle = require('./03-export-function'),
       log   = console.log,
       red   = chalk.redBright;
 
-var c = circle(20);
+const c = circle(20);
 
 log(red('-----------------------------------'));
 log(red(`area:         \t${c.area()}`));

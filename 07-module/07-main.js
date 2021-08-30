@@ -3,8 +3,8 @@
 const Num = require('./07-share'),
       log = console.log;
 
-var n1 = new Num();
-var n2 = new Num();
+const n1 = new Num();
+const n2 = new Num();
 
 n1.add();
 n1.add();
