@@ -12,3 +12,7 @@ function onBark() {
   console.log(`${this.name} barked! energy: ${this.energy}`);
 }
 
+setTimeout(() => {
+  console.log('taidi eat foold');
+  taidi.setEnergy(3);
+}, 10000);

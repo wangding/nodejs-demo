@@ -1,46 +1,36 @@
-class Dog{
-  #listeners = {};
-  #name;
-  #energy;
+const Event = require('./05-event.js');
 
+class Dog extends Event {
   constructor(name, energy) {
+    super();
     this.#name   = name;
     this.#energy = energy;
+    this.#startTimer();
   }
 
-  #timer = setInterval(() => {
-    if(this.#energy > 0) {
-      this.#emit('bark');
-      this.#energy--;
-    } else {
-      clearInterval(this.#timer);
-    }
-  }, 1000);
-
-  on(evt, fn) {
-    if(typeof(this.#listeners[evt]) === 'undefined') {
-      this.#listeners[evt] = [];
-    }
-
-    this.#listeners[evt].push(fn);
+  get name() { return this.#name; }
+  get energy() { return this.#energy; }
+  setEnergy(e) {
+    this.#energy = e;
+    this.#startTimer();
   }
 
-  #emit = (evt, arg) => {
-    if(typeof(this.#listeners[evt]) === 'undefined') {
-      throw(new Error(`${evt} is not defined!`));
-    }
+  #name      = '';
+  #energy    = 0;
+  #timer     = null;
 
-    this.#listeners[evt].forEach((fn) => {
-      fn.call(this, arg);
-    });
-  }
+  #startTimer() {
+    if(this.#timer !== null) return;
 
-  get name() {
-    return this.#name;
-  }
-
-  get energy() {
-    return this.#energy;
+    this.#timer = setInterval(() => {
+      if(this.#energy > 0) {
+        this.emit('bark');
+        this.#energy--;
+      } else {
+        clearInterval(this.#timer);
+        this.#timer = null;
+      }
+    }, 1000);
   }
 }
 

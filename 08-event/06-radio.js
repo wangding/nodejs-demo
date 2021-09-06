@@ -1,38 +1,22 @@
-class Radio {
-  #listeners = {};
-  #station;
+const Event = require('./05-event.js');
 
+class Radio extends Event {
   constructor(station) {
+    super();
     this.#station = station;
   }
 
   #open = setTimeout(() => {
-    this.#emit('open', this.#station);
+    this.emit('open', this.#station);
     clearTimeout(this.#open);
   }, 0);
 
   #stop = setTimeout(() => {
-    this.#emit('stop', this.#station);
+    this.emit('stop', this.#station);
     clearTimeout(this.#stop);
   }, 5000);
 
-  #emit = (evt, arg) => {
-    if(typeof(this.#listeners[evt]) === 'undefined') {
-      throw(new Error(`Error: ${evt} not defined!`));
-    }
-
-    this.#listeners[evt].forEach((fn) => {
-      fn.call(this, arg);
-    });
-  }
-
-  on(evt, fn) {
-    if(typeof(this.#listeners[evt]) === 'undefined') {
-      this.#listeners[evt] = [];
-    }
-
-    this.#listeners[evt].push(fn);
-  }
+  #station;
 }
 
 module.exports = Radio;

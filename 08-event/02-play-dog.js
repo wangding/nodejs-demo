@@ -11,3 +11,8 @@ zangao.on('bark', onBark);
 function onBark() {
   console.log(`${this.name} barked! energy: ${this.energy}`);
 }
+
+setTimeout(() => {
+  console.log('taidi eat food, start bark!');
+  taidi.setEnergy(3);
+}, 10000);
