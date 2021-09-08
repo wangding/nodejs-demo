@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Readable = require('stream').Readable;
+const { Readable } = require('stream');
 
 let c = 'a'.charCodeAt(0);
 

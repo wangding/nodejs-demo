@@ -2,14 +2,14 @@
 
 const stdin  = process.stdin,
       stdout = process.stdout,
-      Trans  = require('stream').Transform;
+      { Transform } = require('stream');
 
 stdin.setEncoding('utf8');
 
-let tf = new Trans();
+let tf = new Transform();
 
 tf._transform = function(chunk, encoding, callback) {
-  this.push(Buffer(chunk.toString('utf8').toUpperCase()));
+  this.push(Buffer.from(chunk.toString('utf8').toUpperCase()));
   callback();
 };
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Writable = require('stream').Writable,
+const { Writable } = require('stream'),
       chalk = require('chalk');
 
 class GreenStream extends Writable {
@@ -9,7 +9,7 @@ class GreenStream extends Writable {
   }
 
   _write(chunk, encoding, callback) {
-    process.stdout.write(chalk.green(chunk));
+    process.stdout.write(chalk.greenBright(chunk));
     callback();
   }
 }

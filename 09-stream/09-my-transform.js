@@ -2,12 +2,12 @@
 
 const stdin  = process.stdin,
       stdout = process.stdout,
-      Trans  = require('stream').Transform,
-      chalk       = require('chalk');
+      { Transform }  = require('stream'),
+      chalk  = require('chalk');
 
 stdin.setEncoding('utf8');
 
-class MyTransform extends Trans {
+class MyTransform extends Transform {
   constructor() {
     super();
   }
