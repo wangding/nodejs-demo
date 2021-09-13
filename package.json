@@ -2,6 +2,7 @@
   "name": "nodejs-demo",
   "version": "1.0.0",
   "description": "Node.js demo code",
+  "type": "module",
   "scripts": {
     "test": "eslint ."
   },
