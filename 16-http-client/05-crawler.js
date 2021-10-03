@@ -4,11 +4,15 @@ const http    = require('https'),
       cheerio = require('cheerio'),
       log     = console.log,
       print   = require('util').debuglog('dev'),
-      addr    = 'https://ke.sifou.com/free',
-      baseURL = 'https://ke.sifou.com';
+      addr    = 'https://ke.segmentfault.com/free',
+      baseURL = 'https://ke.segmentfault.com/';
 
 http.get(addr, (res) => {
   let result = '';
+
+  print(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
+  print(res.headers);
+  print('');
 
   res.on('data', (data) => {
     result += data.toString('utf8');
