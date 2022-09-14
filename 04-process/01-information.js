@@ -21,3 +21,8 @@ log(`external:  ${process.memoryUsage().external}\n`);
 log('env:');
 log(process.env);
 log(`host name: ${process.env.HOSTNAME}`);
+
+console.log('\nApp config:');
+log(process.config);
+
+process.report.writeReport();
