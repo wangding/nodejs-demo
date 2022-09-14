@@ -1,4 +1,3 @@
-/* global fetch: true */
 $(function(){
   var $todo  = $('#todo'),
       $btnOk = $('#okButton'),

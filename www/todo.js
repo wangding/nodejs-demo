@@ -1,4 +1,4 @@
-/* global document fetch:true */
+/* global document: true */
 $(function() {
   const $btnOK = $('button');
   var items;

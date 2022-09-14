@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* global Promise:true */
 //const { setTimeout } = require('node:timers/promises');
 
 async function sleep(ms) {
@@ -7,7 +8,7 @@ async function sleep(ms) {
     setTimeout(()=>{
       resolve();
     }, ms);
-  })
+  });
 }
 
 async function main() {

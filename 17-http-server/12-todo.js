@@ -1,4 +1,4 @@
-/* global fetch, location: true */
+/* global location: true */
 $(() => {
   let $todo      = $('#todo'),
       $btnAdd    = $('#btnAdd'),
