@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-const cp = require('child_process');
+const {exec} = require('child_process');
 
-let cmd = process.argv[2];
+const argv = process.argv;
+argv.shift();
+argv.shift();
 
-cp.exec(cmd, (err, stdout) => {
+const cmd = argv.join(' ');
+
+exec(cmd, (err, stdout) => {
   console.log(stdout);
 });

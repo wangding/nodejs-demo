@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-const cp = require('child_process');
+const {fork} = require('child_process');
 
-console.log('I am father process. PID:', process.pid);
+console.log('father PID:', process.pid);
 
-let son = cp.fork('./11-ipc-child.js'),
-    dau = cp.fork('./11-ipc-child.js');
+const son = fork('./11-ipc-child.js'),
+      dau = fork('./11-ipc-child.js');
 
 son.on('message', (data) => {
-  console.log('I have baby:', data);
+  console.log('I have son:', data);
 });
 
 dau.on('message', (data) => {
-  console.log('I have baby:', data);
+  console.log('I have daughter:', data);
 });
 
 setTimeout(() => {

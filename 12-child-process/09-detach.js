@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-const cp = require('child_process');
+const {spawn} = require('child_process');
 
-console.log('I am father process. PID:', process.pid);
+console.log('father PID:', process.pid);
 
-let child = cp.spawn('./03-child.js', [], {detached: true, stdio: ['ignore', 1, 2]});
+const cp = spawn('./03-child.js', [], {detached: true, stdio: ['ignore', 1, 2]});
 
-child.unref();
+cp.unref();
 
 setTimeout(() => {
-  console.log('5 seconds passed. Father game over!');
-  process.exit(0);
+  console.log('father exit');
+  process.exit();
 }, 5000);

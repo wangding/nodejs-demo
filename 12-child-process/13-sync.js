@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-const cp = require('child_process');
+const {spawnSync} = require('child_process'),
+      log = console.log;
 
-cp.spawnSync('./03-child.js', [], {stdio: ['ignore', 1, 2]});
+const cp = spawnSync('./03-child.js');
 
-console.log('I am father process. PID:', process.pid);
+log(cp.stdout.toString('utf8'));
+log('father PID:', process.pid);

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-console.log('I am child process. PID:', process.pid);
+console.log('child PID:', process.pid);
 
 const timer = setInterval(() => {
   console.log('time:', Date.now());

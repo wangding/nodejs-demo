@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const cp   = require('child_process'),
+const {execFile} = require('child_process'),
       argv = process.argv;
 
 let cmd  = '',  // 命令
@@ -14,7 +14,7 @@ if(argv.length === 2) {
   arg = argv.slice(3, argv.length);
 }
 
-cp.execFile(cmd, arg, (err, stdout) => {
+execFile(cmd, arg, (err, stdout) => {
   if(err) {
     console.error(err.message);
     process.exit(1);

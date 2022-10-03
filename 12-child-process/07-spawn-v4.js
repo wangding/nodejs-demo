@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
-console.log('PID:', process.pid);
+const {spawn} = require('child_process');
 
-const cp = require('child_process');
-
-let cat  = cp.spawn('cat', ['./data.txt']),
-    sort = cp.spawn('sort'),
-    uniq = cp.spawn('uniq');
+const cat  = spawn('cat', ['./data.txt']),
+      sort = spawn('sort'),
+      uniq = spawn('uniq');
 
 cat.stdout.pipe(sort.stdin);
 sort.stdout.pipe(uniq.stdin);

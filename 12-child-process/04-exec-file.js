@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const cp = require('child_process');
+const {execFile} = require('child_process');
 
-console.log('I am father process. PID:', process.pid);
+console.log('father PID:', process.pid);
 
-cp.execFile('./03-child.js', (err, stdout) => {
+execFile('./03-child.js', (err, stdout) => {
   console.log(stdout);
 });
