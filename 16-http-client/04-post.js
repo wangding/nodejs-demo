@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 
-const http = require('http'),
-      url  = require('url'),
-      log  = console.log;
+const http = require('http');
 
-let msg     = process.argv[2] || 'Hello! I am wangding.',
-    opt= url.parse('http://localhost:8080');
+const msg = process.argv[2] || 'Hello! I am wangding.',
+      log = console.log,
+      method = 'POST',
+      url = 'http://localhost:8080';
 
-opt.method = 'POST';
-
-let req = http.request(opt, (res) => {
+let req = http.request(url, {method}, (res) => {
   log(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
   log(res.headers);
   log('');

@@ -1,17 +1,12 @@
 #!/usr/bin/env node
 
-const https = require('https'),
-      log   = console.log,
-      url   = require('url');
+const https = require('https');
 
-let addr    = 'https://api.github.com/search/repositories?q=user:' + (process.argv[2] || 'wangding'),
-    options = url.parse(addr);
+const url = 'https://api.github.com/search/repositories?q=user:' + (process.argv[2] || 'wangding'),
+      log = console.log,
+      headers = { 'User-Agent': '02-get-repos.js' };
 
-options.headers = {
-  'User-Agent': '02-get-repos.js'
-};
-
-https.get(options, (res) => {
+https.get(url, {headers}, (res) => {
   let result = '';
 
   res.on('data', (data) => result += data.toString('utf8'));

@@ -3,27 +3,23 @@
 const http    = require('https'),
       cheerio = require('cheerio'),
       log     = console.log,
-      print   = require('util').debuglog('dev'),
-      addr    = 'https://ke.segmentfault.com/free',
-      baseURL = 'https://ke.segmentfault.com/';
+      print   = require('util').debuglog('crawler'),
+      baseURL = 'https://ke.segmentfault.com/',
+      url     = baseURL + 'free';
 
-http.get(addr, (res) => {
+http.get(url, (res) => {
   let result = '';
 
   print(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
   print(res.headers);
   print('');
 
-  res.on('data', (data) => {
-    result += data.toString('utf8');
-  });
-
+  res.on('data', chunk => result += chunk);
   res.on('end', () => {
     print(result);
 
     let $ = cheerio.load(result);
     $('body').find('.card-title>a').each(function(){
-      print($(this).html());
       let cName = $(this).text(),
           cURL  = baseURL + $(this).attr('href');
 
