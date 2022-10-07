@@ -20,7 +20,7 @@ http.createServer((req, res) =>{
   if(typeof auth !== 'undefined') {
     auth = auth.split(' ');
     if(auth[0] === 'Basic') {
-      let buf = new Buffer(auth[1], 'base64');
+      let buf = Buffer.from(auth[1], 'base64');
       log('username & password:', buf.toString('utf8'));
     }
   }

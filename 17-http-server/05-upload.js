@@ -22,7 +22,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function err(res) {
-  let msg = 'Not found!';
+  const msg = 'Not found!';
 
   res.statusCode = 404;
   res.setHeader('Content-Length', msg.length);

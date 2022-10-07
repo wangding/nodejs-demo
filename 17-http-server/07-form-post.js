@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 const http = require('http'),
-      log  = console.log,
-      qs   = require('querystring');
+      log  = console.log;
 
 let items = [];
 
@@ -13,7 +12,6 @@ http.createServer((req, res) => {
   }
 
   log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  log(req.headers);
   log('');
 
   switch(req.method) {
@@ -22,7 +20,7 @@ http.createServer((req, res) => {
       break;
 
     case 'POST':
-      add(req, res);
+      operate(req, res);
       break;
 
     default:
@@ -58,15 +56,15 @@ function show(res) {
   res.end(html);
 }
 
-function add(req, res) {
-  let body = '';
+function operate(req, res) {
+  let data = '';
 
-  req.on('data', chunk => body += chunk);
+  req.on('data', chunk => data += chunk);
   req.on('end', () => {
-    log(body);
+    log(data);
 
-    let item = qs.parse(body).item;
-    if(item !== '') items.push(item);
+    const item = new URLSearchParams(data).get('item');
+    if(item !== '' && item !== null) items.push(item);
 
     show(res);
   });

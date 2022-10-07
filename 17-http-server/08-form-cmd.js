@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-let http = require('http'),
-    cp   = require('child_process'),
-    qs   = require('querystring'),
-    result = '';
+const http = require('http'),
+      log  = console.log,
+      {exec} = require('child_process');
 
 http.createServer((req, res) => {
   if(req.url != '/') {
@@ -11,12 +10,12 @@ http.createServer((req, res) => {
     return;
   }
 
-  console.log(req.headers);
-  console.log('');
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log('');
 
   switch(req.method) {
     case 'GET':
-      show(res);
+      show(res, '');
       break;
 
     case 'POST':
@@ -39,8 +38,8 @@ function err(res) {
   res.end(msg);
 }
 
-function show(res) {
-  let html = `
+function show(res, result) {
+  const html = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -65,20 +64,20 @@ function show(res) {
 }
 
 function execCmd(req, res) {
-  let cmd = '';
+  let cmd = '', result = '';
 
   req.on('data', chunk => cmd += chunk);
   req.on('end', () => {
-    cmd = qs.parse(cmd).cmd;
+    cmd = new URLSearchParams(cmd).get('cmd');
 
     if(cmd === '') {
-      result = 'Please input linux command';
-      show(res);
+      result = 'Please input linux command!';
+      show(res, result);
     } else {
       console.log(cmd);
-      cp.exec(cmd, (err, stdout, stderr) => {
-        result = (err === null) ? stdout : stderr;
-        show(res);
+      exec(cmd, (err, out, stderr) => {
+        result = (err === null) ? out : stderr;
+        show(res, result);
       });
     }
   });

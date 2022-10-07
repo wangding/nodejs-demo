@@ -46,7 +46,7 @@ http.createServer((req, res) => {
 }).listen(8080);
 
 function showHomePage(res) {
-  let html = fs.readFileSync('./12-todo.html').toString('utf8');
+  const html = fs.readFileSync('./12-todo.html').toString('utf8');
 
   res.writeHead(200, {
     'Content-Type': 'text/html',
@@ -59,7 +59,7 @@ function showHomePage(res) {
 }
 
 function showErrPage(res) {
-  let html = fs.readFileSync('./12-404.html').toString('utf8');
+  const html = fs.readFileSync('./12-404.html').toString('utf8');
 
   res.writeHead(404, {
     'Content-Type': 'text/html',
@@ -71,7 +71,7 @@ function showErrPage(res) {
 }
 
 function sendFile(res) {
-  let data = fs.readFileSync('./12-todo.js').toString('utf8');
+  const data = fs.readFileSync('./12-todo.js').toString('utf8');
 
   res.writeHead(200, {
     'Content-Type': 'application/javascript',
@@ -86,14 +86,13 @@ function printRequest(req) {
   const log = console.log;
 
   log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  log(req.headers);
   log('');
   log(items);
 }
 
 // method: GET, url: /todo, fun: get all todo items
 function select(res) {
-  let body = JSON.stringify(items);
+  const body = JSON.stringify(items);
 
   res.writeHead(200, {
     'Content-Length': Buffer.byteLength(body),
@@ -125,8 +124,8 @@ function del(req, res) {
     return;
   }
 
-  let arg = req.url.split(':'),
-      id  = parseInt(arg[1]);
+  const arg = req.url.split(':'),
+        id  = parseInt(arg[1]);
 
   res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -142,9 +141,10 @@ function del(req, res) {
 
 // method: PUT, url: /todo:id, fun: update todo item by id
 function update(req, res) {
-  let arg = req.url.split(':'),
-      id  = parseInt(arg[1]),
-      item = '';
+  const arg = req.url.split(':'),
+        id  = parseInt(arg[1]);
+
+  let item = '';
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   req.on('data', chunk => item += chunk);

@@ -1,9 +1,23 @@
 #!/usr/bin/env node
 
-const http = require('http');
+const http = require('http'),
+      log  = console.log;
+
+const html = ''
+  + '<!DOCTYPE html>'
+  + '<html>'
+    + '<head>'
+      + '<title>Hello</title>'
+    + '</head>'
+    + '<body>'
+      + '<h1>Hello world!</h1>'
+    + '</body>'
+  + '</html>';
 
 http.createServer((req, res) =>{
-  const html = '<!DOCTYPE html><html><head><title>Hello</title><head><body><h1>Hello world!</h1></body></html>';
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log();
 
   if(req.url === '/') {
     res.writeHead(200, {

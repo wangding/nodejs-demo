@@ -1,86 +1,83 @@
-/* global location: true */
-$(() => {
-  let $todo      = $('#todo'),
+/* global location, document: true */
+const q = document.querySelector,
+      $ = q.bind(document);
+
+const $todo      = $('#todo'),
       $btnAdd    = $('#btnAdd'),
       $btnDelAll = $('#btnDelAll'),
       $out       = $('#output');
 
-  let items = [];
-  let baseURL = location.origin;
+let items = [];
+const baseURL = location.origin + '/todo';
 
-  getItems();
+getItems();
 
-  function onEdtClick(e) {
-    let $li  = $(e.target.parentNode),
-        src  = $li.text(),
+function onEdtClick(e) {
+  const $li  = e.target.parentNode,
+        src  = $li.textContent,
         id   = items.indexOf(src),
-        $DOM = $('<div><input class="todo-edit" type="text"><input class="btn-save" type="button" value="save"><div>'),
-        $edt = $DOM.find('.todo-edit'),
-        $sav = $DOM.find('.btn-save');
+        dom  = '<div><input class="todo-edit" type="text"><input class="btn-save" type="button" value="save"><div>';
 
-    $edt.val(src);
-    $sav.click(() => {
-      let dst = $edt.val();
-      if(dst === '') return;
+  $li.innerHTML = dom;
 
-      $li.html('');
-      $li.html(dst + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>');
+  const $edt = $li.querySelector('.todo-edit'),
+        $sav = $li.querySelector('.btn-save');
 
-      $li.find('.iconlajitong').click(onDelClick);
-      $li.find('.iconbianji').click(onEdtClick);
+  $edt.value = src;
+  $sav.onclick = () => {
+    const dst = $edt.value;
+    if(dst === '') return;
 
-      fetch(baseURL + '/todo:' + id, {method: 'PUT', body: dst});
-      items[id] = dst;
+    $li.innerHTML = dst + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>';
+
+    $li.querySelector('.iconlajitong').onclick = onDelClick;
+    $li.querySelector('.iconbianji').onclick = onEdtClick;
+
+    fetch(baseURL + ':' + id, {method: 'PUT', body: dst});
+    items[id] = dst;
+  };
+
+  $edt.focus();
+  $edt.select();
+}
+
+function onDelClick(e) {
+  const id = items.indexOf(e.target.parentNode.textContent);
+
+  fetch(baseURL + ':' + id, {method: 'DELETE'});
+  items.splice(id, 1);
+
+  showData();
+}
+
+$btnAdd.onclick = () => {
+  if($todo.value === '') return;
+
+  fetch(baseURL, {method: 'POST', body: $todo.value});
+  items.push($todo.value);
+
+  $todo.value = '';
+  showData();
+};
+
+$btnDelAll.onclick = () => {
+  items = [];
+  fetch(baseURL, {method: 'DELETE'});
+  showData();
+};
+
+function getItems() {
+  fetch(baseURL)
+    .then(res => res.json())
+    .then(json => {
+      items = json;
+      showData();
     });
+}
 
-    $li.html('');
-    $li.append($DOM);
-    $edt[0].focus();
-    $edt[0].select();
-  }
-
-  function onDelClick(e) {
-    let id = items.indexOf(e.target.parentNode.textContent);
-
-    fetch(baseURL + '/todo:' + id, {method: 'DELETE'});
-    items.splice(id, 1);
-
-    showData();
-  }
-
-  $btnAdd.click(() => {
-    if($todo.val() === '') return;
-
-    fetch(baseURL + '/todo', {method: 'POST', body: $todo.val()});
-    items.push($todo.val());
-
-    $todo.val('');
-    showData();
-  });
-
-  $btnDelAll.click(() => {
-    $out.html('');
-
-    items = [];
-    fetch(baseURL + '/todo', {method: 'DELETE'});
-  });
-
-  function getItems() {
-    fetch(baseURL + '/todo').then(res => {
-      res.text().then(txt => {
-        items = JSON.parse(txt);
-        showData();
-      });
-    });
-  }
-
-  function showData() {
-    $out.html('');
-
-    let $ul  = $('<ul></ul>');
-    $ul.html(items.map(item => '<li>' + item + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>').join('\n'));
-    $out.append($ul);
-    $out.find('.iconlajitong').click(onDelClick);
-    $out.find('.iconbianji').click(onEdtClick);
-  }
-});
+function showData() {
+  const dom = items.map(item => '<li>' + item + '<i class="iconfont iconbianji"></i><i class="iconfont iconlajitong"></i></li>').join('\n');
+  $out.innerHTML = `<ul>${dom}</ul>`;
+  $out.querySelectorAll('.iconlajitong').forEach(item => item.onclick = onDelClick);
+  $out.querySelectorAll('.iconbianji').forEach(item => item.onclick = onEdtClick);
+}

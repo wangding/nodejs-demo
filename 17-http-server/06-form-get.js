@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 const http = require('http'),
-      url  = require('url'),
-      qs   = require('querystring'),
       log  = console.log;
 
 let items = [];
 
 http.createServer((req, res) => {
-  let path = url.parse(req.url).pathname;
+  let path = new URL(req.url, `http://${req.headers.host}`).pathname;
 
   if(path != '/') {
     err(res);
@@ -16,10 +14,9 @@ http.createServer((req, res) => {
   }
 
   log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  log(req.headers);
   log('');
 
-  add(req, res);
+  operate(req, res);
 }).listen(8080);
 
 function show(res) {
@@ -49,10 +46,10 @@ function show(res) {
   res.end(html);
 }
 
-function add(req, res) {
-  const value = qs.parse(url.parse(req.url).query).item;
+function operate(req, res) {
+  const value = new URL(req.url, `http://${req.headers.host}`).searchParams.get('item');
 
-  if(typeof value !== 'undefined' && value !== '') items.push(value);
+  if(value !== null && value !== '') items.push(value);
 
   log(items);
   show(res);
