@@ -34,10 +34,10 @@ db.select = async(con) => {
 };
 
 (async() => {
-  const con   = await mysql.createConnection({
+  const con = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'dddd',
+    password: 'ddd',
     database: 'demo'
   });
 
