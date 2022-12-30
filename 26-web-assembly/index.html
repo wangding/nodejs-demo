@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>wasm</title>
+</head>
+<body>
+  <h1>WebAssembly demo</h1>
+  <script>
+    fetch('./add.wasm')
+    .then(res => res.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes))
+    .then(results => results.instance.exports)
+    .then(obj => console.log(obj.add(2, 3)));
+  </script>
+</body>
+</html>
