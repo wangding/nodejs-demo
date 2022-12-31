@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* global Uint8Array, WebAssembly: true */
 const {readFileSync} = require('fs'),
       Benchmark = require('benchmark'),
       log = console.log;

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* global Uint8Array, WebAssembly: true */
 const assert = require('assert');
 const {readFileSync} = require('fs');
 
