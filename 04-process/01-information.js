@@ -26,3 +26,10 @@ console.log('\nApp config:');
 log(process.config);
 
 process.report.writeReport();
+
+const os = require('os');
+log(os.cpus());
+log(`linux uptime: ${os.uptime()} s`);
+log(os.version());
+log(os.networkInterfaces());
+log(os.userInfo());

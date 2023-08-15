@@ -14,3 +14,7 @@ process.on('SIGINT', () => {
 process.on('SIGTSTP', () => {
   log('You have pressed Ctrl + Z.');
 });
+
+const os = require('os');
+
+console.log(os.constants.signals);
