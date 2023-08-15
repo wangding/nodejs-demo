@@ -23,9 +23,12 @@ log(`qq: ${user.qq}`);        // 输出方式四：模板字符串输出
 
 console.dir(user);
 console.dir([user, user]);
+console.dir({o: {b: {j: user}}});
+console.dir({o: {b: {j: user}}}, {depth: null});
 
 console.table(user);
 console.table([user, user, user]);
-console.table([user, user, user], ['name']);
+console.table([user, user, user], ['name', 'qq']);
+// console.table 最适合打印数据库的查询数据，因为查询结果就是表格
 
 console.error('Error! something wrong!');
