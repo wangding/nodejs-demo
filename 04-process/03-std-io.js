@@ -22,4 +22,3 @@ stdin.on('data', (data) => {
 stdin.on('end', () => {
   log(me);
 });
-
