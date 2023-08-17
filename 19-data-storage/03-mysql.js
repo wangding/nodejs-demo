@@ -33,7 +33,7 @@ db.select = async(con) => {
   log(rows);
 };
 
-(async() => {
+async function main() {
   const con = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -43,4 +43,6 @@ db.select = async(con) => {
 
   await db[process.argv[2]](con, process.argv[3], process.argv[4]);
   await con.end();
-})();
+}
+
+main();
