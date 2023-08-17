@@ -13,10 +13,8 @@ log(`user id:      ${process.getuid()}`);
 log(`group id:     ${process.getgid()}`);
 log(`cwd:          ${process.cwd()}\n`);
 
-log(`rss:       ${process.memoryUsage().rss}`);
-log(`heapTotal: ${process.memoryUsage().heapTotal}`);
-log(`heapUsed:  ${process.memoryUsage().heapUsed}`);
-log(`external:  ${process.memoryUsage().external}\n`);
+log('memoryUsage:');
+console.dir(process.memoryUsage());
 
 log('env:');
 log(process.env);
@@ -30,6 +28,7 @@ process.report.writeReport();
 const os = require('os');
 log(os.cpus());
 log(`linux uptime: ${os.uptime()} s`);
+log(os.platform());
 log(os.version());
 log(os.networkInterfaces());
 log(os.userInfo());

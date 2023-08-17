@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const readline = require('readline/promises');
-const { stdin: input, stdout: output } = require('process');
+const { stdin: input, stdout: output } = process;
 
 const rl = readline.createInterface({ input, output });
 

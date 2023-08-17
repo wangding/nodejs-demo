@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-const log   = console.log,
-      stdin = process.stdin,
-      stdout= process.stdout,
-      msg   = ['Name', 'Email', 'QQ', 'Mobile'];
+const log = console.log,
+      { stdin, stdout } = process,
+      msg = ['Name', 'Email', 'QQ', 'Mobile'];
 
 let me = {}, i = 1;
 

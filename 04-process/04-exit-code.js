@@ -1,18 +1,23 @@
 #!/usr/bin/env node
 
-const log = console.log,
-      err = console.error,
-      arg = process.argv[2];
+/*
+// main 函数返回值，不能作为程序退出码
+function main() {
+  const exitCode = process.argv[2];
+  console.log(`exit code: ${exitCode}`);
+  return exitCode;
+}
 
-if(typeof(arg) === 'undefined') {
-  err('缺少命令行参数！');
+main();
+*/
+
+const log = console.log,
+      num = Number(process.argv[2] ?? 0);
+
+if(isNaN(num)) {
+  log('命令行参数不是合法数字！');
   process.exit(1);
 }
 
-if(isNaN(Number(arg))) {
-  err('命令行参数不是合法数字！');
-  process.exit(2);
-}
-
-log('退出码:', arg);
-process.exit(arg);
+log('退出码:', num);
+process.exit(num);

@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
 const sig = process.argv[2],
+      argc= process.argv.length,
       pid = process.argv[3],
       err = console.error;
 
-if(process.argv.length < 4) {
+if(argc < 4) {
   err('命令行参数少于两个！');
   process.exit(1);
 }
 
-if(process.argv.length > 4) {
+if(argc > 4) {
   err('命令行参数多于两个！');
   process.exit(2);
 }
