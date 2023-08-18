@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-/* this code need node v12+ */
 const log = console.log;
 
 class Bomb {

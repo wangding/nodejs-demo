@@ -1,21 +1,27 @@
 #!/usr/bin/env node
 
+// cmd: echo hello; sleep 2; echo world
+
 /* global Promise:true */
-//const { setTimeout } = require('node:timers/promises');
+const log = console.log;
+const { setTimeout:delay } = require('timers/promises');
 
 async function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(()=>{
-      resolve();
-    }, ms);
-  });
+  return new Promise(resolve => setTimeout(() => resolve(), ms));
 }
 
-async function main() {
-  console.log('hello');
+async function fn() {
+  log('hello');
   await sleep(2000);
-  //await setTimeout(1000);
-  console.log('world');
+  log('world\n');
+
+  log('wang');
+  await delay(2000);
+  log('ding\n');
 }
 
-main();
+log('abc');
+setTimeout(() => {
+  log('def\n');
+  fn();
+}, 2000);
