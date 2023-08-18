@@ -5,12 +5,15 @@ const log = console.log,
       pwd = process.argv[3];
 
 if(process.argv.length !== 4) {
-  console.error('命令行格式：cmd username password');
+  console.error('usage：cmd username password');
   process.exit(1);
 }
 
 log('user name: %s\npassword: %s', usr, pwd);
 
-const buf = Buffer.from(usr + ':' + pwd);
+// method A
+log('Base64:', btoa(usr + ':' + pwd));
 
+// method B
+const buf = Buffer.from(usr + ':' + pwd);
 log('Base64:', buf.toString('Base64'));
