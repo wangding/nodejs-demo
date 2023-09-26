@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const EventEmitter = require('events').EventEmitter,
+const { EventEmitter } = require('events'),
       log          = console.log,
       e            = new EventEmitter();
 

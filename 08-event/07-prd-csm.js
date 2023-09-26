@@ -24,34 +24,39 @@ class Queue extends EventEmitter {
   #data = [];
 }
 
-let queue = new Queue();
-
 class Producer {
-  constructor() {}
+  constructor(queue) {
+    this.#queue = queue;
+  }
+
   create(data){
     log('+ prd create:', data);
-    queue.write(data);
+    this.#queue.write(data);
   }
+
+  #queue = null;
 }
 
 class Consumer {
-  constructor() {}
-  destroy(){
-    log('- csm destroy:', queue.read());
+  constructor(queue) {
+    this.#queue = queue;
   }
+
+  destroy(){
+    log('- csm destroy:', this.#queue.read());
+  }
+
+  #queue = null;
 }
 
-let csm   = new Consumer();
-
-queue.on('data', async()=>{
-  csm.destroy();
-});
-
 function main() {
-  const prd = new Producer();
-  for(let i=0; i<5; i++) {
-    prd.create(i);
-  }
+  const queue = new Queue(),
+        prd   = new Producer(queue),
+        csm   = new Consumer(queue);
+
+  queue.on('data', ()=>csm.destroy());
+
+  for(let i=0; i<5; i++) prd.create(i);
 }
 
 main();
