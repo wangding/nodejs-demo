@@ -2,20 +2,18 @@
 
 const { Readable } = require('stream');
 
-let c = 'a'.charCodeAt(0);
-
 class MyReadable extends Readable {
   constructor() {
     super();
   }
 
   _read() {
-    this.push(String.fromCharCode(c++));
-    if (c>'z'.charCodeAt(0)) {
-      this.push(null);
-    }
+    this.push(String.fromCharCode(this.#c++));
+    if (this.#c>'z'.charCodeAt(0)) this.push(null);
   }
+
+  #c = 'a'.charCodeAt(0);
 }
 
-let rs = new MyReadable();
+const rs = new MyReadable();
 rs.pipe(process.stdout);
