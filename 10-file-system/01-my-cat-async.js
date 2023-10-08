@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs   = require('fs'),
-      file = process.argv[2] || __filename;
+      file = process.argv[2] ?? __filename;
 
 fs.readFile(file, (err, buf) => {
   if(err) {

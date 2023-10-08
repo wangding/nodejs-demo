@@ -2,8 +2,8 @@
 
 const fs   = require('fs'),
       err  = console.error,
-      uid  = process.argv[2],
-      gid  = process.argv[3],
+      uid  = Number(process.argv[2]),
+      gid  = Number(process.argv[3]),
       file = process.argv[4];
 
 if(process.argv.length !== 5) {
@@ -12,7 +12,7 @@ if(process.argv.length !== 5) {
 }
 
 try{
-  fs.chownSync(file, Number(uid), Number(gid));
+  fs.chownSync(file, uid, gid);
 } catch(e) {
   err(e.message);
   process.exit(2);

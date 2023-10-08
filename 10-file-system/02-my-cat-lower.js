@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs   = require('fs'),
-      file = process.argv[2] || __filename;
+      file = process.argv[2] ?? __filename;
 
 try {
   let len = fs.statSync(file).size,
@@ -10,6 +10,7 @@ try {
 
   fs.readSync(fid, buf, 0, len, 0);
   console.log(buf.toString('utf8'));
+  fs.closeSync(fid);
 } catch(e) {
   console.error(e.message);
   process.exit(1);

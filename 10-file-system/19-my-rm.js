@@ -10,27 +10,20 @@ if(typeof(src) === 'undefined') {
 }
 
 if(!fs.existsSync(src)) {
-  console.error('%s not exist!', src);
+  console.error('%s not exists!', src);
   process.exit(2);
 }
-
-if(fs.statSync(src).isFile())  fs.unlinkSync(src);
-
-if(fs.statSync(src).isDirectory()) deleteDir(src);
 
 function deleteDir(folder) {
   let files = fs.readdirSync(folder);
 
   for(let i=0; i<files.length; i++) {
-    let file = join(folder, files[i]);
-
-    if(fs.statSync(file).isFile()) {
-      fs.unlinkSync(file);
-      continue;
-    }
-
-    if(fs.statSync(file).isDirectory()) deleteDir(file);
+    const file = join(folder, files[i]);
+    fs.statSync(file).isDirectory() ? deleteDir(file) : fs.unlinkSync(file);
   }
 
   fs.rmdirSync(folder);
 }
+
+if(fs.statSync(src).isFile())      fs.unlinkSync(src);
+if(fs.statSync(src).isDirectory()) deleteDir(src);

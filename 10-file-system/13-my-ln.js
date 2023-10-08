@@ -4,7 +4,7 @@ const fs  = require('fs'),
       err = console.error;
 
 let opt = {
-  '4': createhardLink,
+  '4': createHardLink,
   '5': createSoftLink
 };
 
@@ -25,7 +25,7 @@ function createSoftLink() {
   }
 }
 
-function createhardLink() {
+function createHardLink() {
   let src = process.argv[2],
       lnk = process.argv[3];
 

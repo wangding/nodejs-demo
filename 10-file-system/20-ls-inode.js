@@ -1,19 +1,26 @@
 #!/usr/bin/env node
 
+/* 递归打印目录下的子目录或文件的硬链接数和 inode 值 */
+
 const fs   = require('fs'),
-      join = require('path').join,
       log  = console.log,
-      src  = process.argv[2] || 'root';
+      join = require('path').join,
+      src  = process.argv[2] ?? 'root';
 
-let res = validate();
+function main() {
+  const res = validate();
 
-if(res.code !== 0) {
-  console.error(res.msg);
-  process.exit(res.code);
+  if(res.code !== 0) {
+    console.error(res.msg);
+    process.exit(res.code);
+  }
+
+  logInode(src);
+  log('---');
+  lsInode(src);
 }
 
-logInode(src);
-lsInode(src);
+main();
 
 function lsInode(folder) {
   let files = fs.readdirSync(folder);
@@ -37,7 +44,8 @@ function lsInode(folder) {
 
 function logInode(folder) {
   let last = folder.split('/').pop();
-  let dir = '', space = '                                   ';
+  let dir  = '',
+      space = ' '.repeat(20);
 
   if(last === '.') {
     folder = folder.slice(0, folder.length-1);

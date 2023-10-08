@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-import { readFile } from 'fs/promises';
+const { readFile } = require('fs/promises');
 
-const file = process.argv[2];
+const file = process.argv[2] ?? __filename;
 
 async function main() {
   try {
-    const content = await readFile(file, 'utf8');
-    console.log(content);
+    console.log(await readFile(file, 'utf8'));
   } catch(e) {
     console.error(e.message);
   }

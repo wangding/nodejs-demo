@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 const fs  = require('fs'),
-      err = console.error,
       dir = process.argv[2];
 
 try {
   fs.rmdirSync(dir);
 } catch(e) {
-  err(e.message);
+  console.error(e.message);
   process.exit(1);
 }
