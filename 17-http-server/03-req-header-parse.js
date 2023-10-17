@@ -15,14 +15,11 @@ http.createServer((req, res) =>{
 
   log('authorization:', req.headers.authorization);
 
-  let auth = req.headers.authorization;
+  const auth = req.headers.authorization;
 
   if(typeof auth !== 'undefined') {
-    auth = auth.split(' ');
-    if(auth[0] === 'Basic') {
-      let buf = Buffer.from(auth[1], 'base64');
-      log('username & password:', buf.toString('utf8'));
-    }
+    const [type, user] = auth.split(' ');
+    if(type === 'Basic') log('username:password:', atob(user));
   }
 
   res.end('OK!');

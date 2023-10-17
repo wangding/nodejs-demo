@@ -7,17 +7,12 @@ if(process.argv.length !== 3) {
 
 // method A
 const buf = atob(process.argv[2]);
-const info = buf.split(':');
+const [userName, pwd] = buf.split(':');
 
 // method B
 /*
 const buf = Buffer.from(process.argv[2], 'base64');
-const info = buf.toString('utf8').split(':');
+const [userName, pwd] = buf.toString('utf8').split(':');
 */
 
-if(info.length !== 2) {
-  console.error('信息有误！');
-  process.exit(2);
-}
-
-console.log('user name: %s\npassword: %s', info[0], info[1]);
+console.log(`userName: ${userName}\npassword: ${pwd}`);
