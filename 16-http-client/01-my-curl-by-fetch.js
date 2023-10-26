@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
 const log  = console.log,
-      url  = process.argv[2] || 'http://sample.wangding.co/web/one-div.html',
+      url  = process.argv[2],
       headers = { 'User-Agent': '01-my-curl.js' };
+
+if(!url) {
+  log('Usage: cmd url');
+  process.exit();
+}
 
 fetch(url, headers)
   .then(res => {

@@ -1,30 +1,22 @@
 #!/usr/bin/env node
 
 const http = require('http'),
-      url  = require('url'),
       log  = console.log;
 
-let addr = process.argv[2] || 'http://www.sian.com/';
+const baseURL = 'http://localhost:8080';
 
-function opt(addr) {
-  let options = url.parse(addr);
-  options.headers = { 'User-Agent': '05-redirection.js' };
-
-  return options;
-}
-
-function get(options) {
-  http.get(options, (res) => {
+function get(url) {
+  http.get(url, res => {
     log(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
     log(res.headers);
     log('');
 
     if(res.statusCode < 400 && res.statusCode >= 300) {
-      get(opt(res.headers.location));
+      get(baseURL + res.headers.location);
     } else {
       res.pipe(process.stdout);
     }
   });
 }
 
-get(opt(addr));
+get(baseURL);

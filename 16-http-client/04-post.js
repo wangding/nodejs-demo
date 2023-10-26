@@ -2,16 +2,19 @@
 
 const http = require('http');
 
-const msg = process.argv[2] || 'Hello! I am wangding.',
+const msg = process.argv[2],
       log = console.log,
-      method = 'POST',
       url = 'http://localhost:8080';
 
-let req = http.request(url, {method}, (res) => {
+if(!msg) {
+  log('Usage: cmd data');
+  process.exit();
+}
+
+const req = http.request(url, {method: 'POST'}, res => {
   log(`HTTP/${res.httpVersion} ${res.statusCode} ${res.statusMessage}`);
   log(res.headers);
   log('');
-
   res.pipe(process.stdout);
 });
 

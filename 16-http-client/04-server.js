@@ -8,6 +8,5 @@ http.createServer((req, res) => {
   log(req.headers);
   log('');
   req.pipe(process.stdout);
-
   res.end('OK!');
 }).listen(8080);

@@ -12,15 +12,26 @@ const cityCode = {
   '石家庄': 101090101,
 };
 
-const city = process.argv[2] || '石家庄',
+const city = process.argv[2] ?? '石家庄',
       addr = 'http://t.weather.sojson.com/api/weather/city/' + cityCode[city];
+
+function format(obj) {
+  return {
+    '日期': `${obj.ymd} ${obj.week}`,
+    '最高温': obj.high,
+    '最低温': obj.low,
+    '风力': `${obj.fx} ${obj.fl}`,
+    '状态': obj.type,
+  };
+}
 
 http.get(addr, res => {
   let data = '';
-
-  res.on('data', chunk => data += chunk.toString('utf8'));
+  res.setEncoding('utf8');
+  res.on('data', chunk => data+=chunk);
   res.on('end', () => {
-    data = JSON.parse(data);
-    console.dir(data, { depth: null, colors: true });
+    data = JSON.parse(data).data.forecast;
+    data = data.map(format);
+    console.table(data);
   });
 });
