@@ -1,0 +1,4 @@
+{
+  "watch": ["./*.js", "./test/*.js"],
+  "exec": "npm test"
+}
