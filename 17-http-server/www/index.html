@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计算器</title>
+  <style>
+    label {
+      display: inline-block;
+      width: 50px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label>宽度：</label>
+    <input type="text" name="width"/>
+    <br />
+    <label>高度：</label>
+    <input type="text" name="height"/>
+    <br />
+    <label>&nbsp;</label>
+    <input type="button" value="计算" />
+    <br />
+    <label>周长：</label>
+    <input type="text" disabled name="perimeter" />
+    <br />
+    <label>面积：</label>
+    <input type="text" disabled name="area" />
+    <br />
+  </form>
+  <script src="rectangle.js"></script>
+</body>
+</html>

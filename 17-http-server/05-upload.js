@@ -4,14 +4,14 @@ const http = require('http'),
       log  = console.log;
 
 http.createServer((req, res) => {
+  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
+  log(req.headers);
+  log('');
+
   if(req.url != '/') {
     err(res);
     return;
   }
-
-  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  log(req.headers);
-  log('');
 
   if(req.method === 'POST') {
     req.pipe(process.stdout);

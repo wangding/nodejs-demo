@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-const http = require('http');
+const http = require('http'),
+      log  = console.log;
+
+function select(req, res) { res.end(req.method); }
+const insert = update = remove = select;
 
 http.createServer((req, res) => {
-  console.log('HTTP request method:', req.method);
+  log('HTTP request method:', req.method);
 
   switch(req.method) {
     case 'GET':
@@ -11,7 +15,7 @@ http.createServer((req, res) => {
       break;
 
     case 'POST':
-      create(req, res);
+      insert(req, res);
       break;
 
     case 'PUT':
@@ -26,19 +30,3 @@ http.createServer((req, res) => {
       res.end('Something Wrong!');
   }
 }).listen(8080);
-
-function select(req, res) {
-  res.end(req.method);
-}
-
-function create(req, res) {
-  res.end(req.method);
-}
-
-function update(req, res) {
-  res.end(req.method);
-}
-
-function remove(req, res) {
-  res.end(req.method);
-}
